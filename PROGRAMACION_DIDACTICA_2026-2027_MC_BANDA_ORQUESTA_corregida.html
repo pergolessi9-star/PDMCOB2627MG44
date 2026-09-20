@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programación Didáctica 2026/2027 — Música de Cámara · Banda · Orquesta</title>
+<style>
+:root{
+  --primary:#1a3a5c;
+  --primary-light:#2c5f8a;
+  --accent:#c8a45c;
+  --bg:#ffffff;
+  --bg-alt:#f7f9fb;
+  --border:#d8e0e8;
+  --text:#1f2937;
+  --text-light:#4b5563;
+  --hold-bg:#fff8e6;
+  --hold-border:#e6c34d;
+  --norm-bg:#eef6ee;
+  --norm-border:#7ab87a;
+  --dev-bg:#eef2f8;
+  --dev-border:#7a9ec8;
+  --ev-bg:#f8eef6;
+  --ev-border:#c87ab8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Georgia','Times New Roman',serif;
+  font-size:15px;
+  line-height:1.7;
+  color:var(--text);
+  background:var(--bg);
+  max-width:1100px;
+  margin:0 auto;
+  padding:40px 60px;
+}
+@media(max-width:900px){
+  body{padding:20px 24px;font-size:14px}
+}
+h1,h2,h3,h4,h5,h6{
+  font-family:'Helvetica Neue','Arial',sans-serif;
+  color:var(--primary);
+  line-height:1.3;
+  margin-top:1.8em;
+  margin-bottom:0.6em;
+}
+h1{
+  font-size:2.2em;
+  text-align:center;
+  border-bottom:3px double var(--accent);
+  padding-bottom:20px;
+  margin-top:0;
+}
+h2{
+  font-size:1.6em;
+  border-bottom:2px solid var(--primary-light);
+  padding-bottom:8px;
+  margin-top:2.5em;
+}
+h3{
+  font-size:1.25em;
+  color:var(--primary-light);
+  margin-top:2em;
+}
+h4{
+  font-size:1.1em;
+  color:var(--primary-light);
+  margin-top:1.6em;
+}
+h5{
+  font-size:1em;
+  color:var(--text-light);
+  margin-top:1.4em;
+  font-style:italic;
+}
+p{margin-bottom:0.9em;text-align:justify}
+ul,ol{margin:0.8em 0 1em 2em}
+li{margin-bottom:0.4em}
+strong{color:var(--primary)}
+em{color:var(--text-light)}
+
+/* Cover */
+.cover{
+  text-align:center;
+  padding:60px 20px;
+  border:1px solid var(--border);
+  background:var(--bg-alt);
+  margin-bottom:50px;
+  border-radius:4px;
+}
+.cover h1{border:none;font-size:2.4em;margin-bottom:10px}
+.cover .subtitle{font-size:1.3em;color:var(--primary-light);margin-bottom:30px;font-style:italic}
+.cover .meta{font-size:1em;color:var(--text-light);line-height:2}
+.cover .meta strong{display:inline-block;min-width:180px;text-align:right;padding-right:15px;color:var(--primary)}
+
+/* Index */
+.index{
+  background:var(--bg-alt);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:30px 40px;
+  margin:40px 0;
+}
+.index h2{margin-top:0;text-align:center;border-bottom:2px solid var(--primary-light)}
+.index ol{margin-left:1.5em}
+.index ol ol{margin-top:0.3em}
+.index a{color:var(--primary-light);text-decoration:none}
+.index a:hover{text-decoration:underline;color:var(--accent)}
+
+/* Tables */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:1.2em 0;
+  font-size:0.92em;
+  font-family:'Helvetica Neue','Arial',sans-serif;
+}
+th,td{
+  border:1px solid var(--border);
+  padding:8px 10px;
+  text-align:left;
+  vertical-align:top;
+}
+th{
+  background:var(--primary);
+  color:#fff;
+  font-weight:600;
+}
+tr:nth-child(even){background:var(--bg-alt)}
+tr:hover{background:#eef4fa}
+
+/* Block headers */
+.block-header{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);
+  color:#fff;
+  padding:20px 30px;
+  margin:60px -60px 30px -60px;
+  border-radius:0;
+}
+@media(max-width:900px){.block-header{margin:40px -24px 20px -24px;padding:16px 20px}}
+.block-header h2{color:#fff;border:none;margin:0;font-size:1.8em}
+.block-header p{color:#dbe6f0;margin:5px 0 0 0;font-style:italic}
+
+/* Clasificación documental badges */
+.tag{
+  display:inline-block;
+  padding:2px 10px;
+  border-radius:3px;
+  font-size:0.78em;
+  font-family:'Helvetica Neue','Arial',sans-serif;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+.tag-norm{background:var(--norm-bg);color:#3a6b3a;border:1px solid var(--norm-border)}
+.tag-of{background:#eef6ee;color:#3a6b3a;border:1px solid var(--norm-border)}
+.tag-dev{background:var(--dev-bg);color:#2c4a6b;border:1px solid var(--dev-border)}
+.tag-ev{background:var(--ev-bg);color:#6b2c5c;border:1px solid var(--ev-border)}
+.tag-hold{background:var(--hold-bg);color:#8a6a1a;border:1px solid var(--hold-border)}
+
+.hold-notice{
+  background:var(--hold-bg);
+  border-left:4px solid var(--hold-border);
+  padding:12px 18px;
+  margin:1em 0;
+  font-size:0.92em;
+}
+
+.norm-notice{
+  background:var(--norm-bg);
+  border-left:4px solid var(--norm-border);
+  padding:12px 18px;
+  margin:1em 0;
+  font-size:0.92em;
+}
+
+.dev-notice{
+  background:var(--dev-bg);
+  border-left:4px solid var(--dev-border);
+  padding:12px 18px;
+  margin:1em 0;
+  font-size:0.92em;
+}
+
+/* Blockquote */
+blockquote{
+  border-left:4px solid var(--accent);
+  background:var(--bg-alt);
+  padding:12px 20px;
+  margin:1em 0;
+  font-style:italic;
+  color:var(--text-light);
+}
+
+/* Separator */
+hr{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:2.5em 0;
+}
+
+/* Print */
+@media print{
+  body{max-width:100%;padding:0;font-size:11pt}
+  .block-header{background:var(--primary)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .index{page-break-after:always}
+  h2{page-break-after:avoid}
+  table{page-break-inside:avoid}
+  .no-print{display:none}
+}
+
+/* Download button */
+.download-bar{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:1000;
+}
+.download-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:10px 20px;
+  border-radius:4px;
+  cursor:pointer;
+  font-family:'Helvetica Neue','Arial',sans-serif;
+  font-size:0.9em;
+  font-weight:600;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  transition:background 0.2s;
+}
+.download-btn:hover{background:var(--accent)}
+@media print{.download-bar{display:none}}
+</style>
+</head>
+<body>
+
+<div class="download-bar no-print">
+  <button class="download-btn" onclick="window.print()">⬇ Descargar / Imprimir PDF</button>
+</div>
+
+<!-- ===================== PORTADA ===================== -->
+<div class="cover">
+  <h1>PROGRAMACIÓN DIDÁCTICA<br>2026/2027</h1>
+  <p class="subtitle">Música de Cámara · Banda · Orquesta</p>
+  <p class="subtitle" style="font-size:1.1em">Enseñanzas Profesionales de Música · Extremadura</p>
+  <div class="meta" style="margin-top:40px">
+    <p><strong>Centro:</strong> [DENOMINACIÓN OFICIAL DEL CENTRO]</p>
+    <p><strong>Localidad:</strong> [LOCALIDAD]</p>
+    <p><strong>Provincia:</strong> [PROVINCIA]</p>
+    <p><strong>Departamento:</strong> [DENOMINACIÓN OFICIAL DEL DEPARTAMENTO]</p>
+    <p><strong>Materias:</strong> Música de Cámara, Banda y Orquesta</p>
+    <p><strong>Cursos:</strong> 1.º a 6.º de Enseñanzas Profesionales de Música</p>
+    <p><strong>Profesorado responsable:</strong> [NOMBRE/S DEL PROFESORADO]</p>
+    <p><strong>Curso académico:</strong> 2026/2027</p>
+  </div>
+</div>
+
+<!-- ===================== ÍNDICE ===================== -->
+<div class="index">
+  <h2>Índice General</h2>
+  <ol>
+    <li><a href="#b0">Bloque 0. Presentación y criterios del documento</a></li>
+    <li><a href="#b1">Bloque I. Marco normativo</a></li>
+    <li><a href="#b2">Bloque II. Contextualización</a></li>
+    <li><a href="#b3">Bloque III. Principios y finalidades educativas</a></li>
+    <li><a href="#b4">Bloque IV. Objetivos</a></li>
+    <li><a href="#b5">Bloque V. Competencias y desarrollo competencial</a></li>
+    <li><a href="#b6">Bloque VI. Contenidos y saberes</a></li>
+    <li><a href="#b7">Bloque VII. Metodología</a></li>
+    <li><a href="#b8">Bloque VIII. Organización y temporalización</a></li>
+    <li><a href="#b9">Bloque IX. Unidades didácticas y situaciones de aprendizaje</a></li>
+    <li><a href="#b10">Bloque X. Evaluación</a></li>
+    <li><a href="#b11">Bloque XI. Atención a la diversidad e inclusión</a></li>
+    <li><a href="#b12">Bloque XII. Actividades complementarias y artísticas</a></li>
+    <li><a href="#b13">Bloque XIII. Recursos</a></li>
+    <li><a href="#b14">Bloque XIV. Coordinación</a></li>
+    <li><a href="#b15">Bloque XV. Seguimiento y evaluación de la programación</a></li>
+    <li><a href="#b16">Bloque XVI. Garantías documentales</a></li>
+    <li><a href="#b17">Bloque XVII. Anexos</a></li>
+  </ol>
+</div>
+
+<!-- ===================== BLOQUE 0 ===================== -->
+<div class="block-header" id="b0">
+  <h2>Bloque 0. Presentación y criterios del documento</h2>
+</div>
+
+<h3>0.1. Denominación de la programación</h3>
+<p>La presente Programación Didáctica corresponde al curso académico 2026/2027 y comprende las materias de Música de Cámara, Banda y Orquesta de las Enseñanzas Profesionales de Música, en el ámbito de la Comunidad Autónoma de Extremadura.</p>
+<p>El documento constituye el instrumento de programación mediante el cual se concreta, organiza y desarrolla la intervención educativa correspondiente a estas materias durante el curso académico indicado, de acuerdo con el marco normativo curricular aplicable y con las características del centro, del alumnado y de las agrupaciones instrumentales.</p>
+
+<h3>0.2. Enseñanzas, materias y cursos a los que se aplica</h3>
+<p>La presente Programación Didáctica se aplica a las Enseñanzas Profesionales de Música desarrolladas en la Comunidad Autónoma de Extremadura durante el curso académico 2026/2027, en el ámbito de las materias de Música de Cámara, Banda y Orquesta.</p>
+<p>Su ámbito de aplicación comprende los seis cursos de las Enseñanzas Profesionales de Música, de 1.º a 6.º curso, en aquellos cursos y agrupaciones en los que se impartan las materias objeto de esta programación.</p>
+
+<h3>0.3. Curso académico 2026/2027</h3>
+<p>La presente Programación Didáctica se establece para el curso académico 2026/2027 y constituye el marco de referencia para la planificación, desarrollo, seguimiento y evaluación de las materias de Música de Cámara, Banda y Orquesta.</p>
+<p>La programación se concibe como un documento de planificación educativa susceptible de seguimiento y revisión durante el desarrollo del curso. Las posibles modificaciones que resulten necesarias deberán quedar debidamente justificadas y registradas conforme a los procedimientos establecidos.</p>
+
+<h3>0.4. Centro, departamento y profesorado responsable</h3>
+<table>
+<tr><th>Campo</th><th>Contenido</th></tr>
+<tr><td>Centro</td><td>[DENOMINACIÓN OFICIAL DEL CENTRO]</td></tr>
+<tr><td>Localidad</td><td>[LOCALIDAD]</td></tr>
+<tr><td>Departamento</td><td>[DENOMINACIÓN OFICIAL DEL DEPARTAMENTO]</td></tr>
+<tr><td>Materias</td><td>Música de Cámara, Banda y Orquesta</td></tr>
+<tr><td>Cursos</td><td>1.º a 6.º de Enseñanzas Profesionales de Música</td></tr>
+<tr><td>Profesorado responsable</td><td>[NOMBRE/S DEL PROFESORADO]</td></tr>
+<tr><td>Curso académico</td><td>2026/2027</td></tr>
+</table>
+
+<h3>0.5. Naturaleza y finalidad de la programación didáctica</h3>
+<p>La presente Programación Didáctica es el instrumento de programación mediante el cual se concreta y organiza la intervención educativa correspondiente a las materias de Música de Cámara, Banda y Orquesta de las Enseñanzas Profesionales de Música, para el curso académico 2026/2027.</p>
+<p>Su naturaleza es esencialmente didáctica, curricular y organizativa. Parte del marco normativo y curricular aplicable y lo concreta en una planificación coherente de los procesos de enseñanza y aprendizaje, teniendo en cuenta las características del alumnado, las particularidades de la práctica musical colectiva, la organización del centro y las condiciones reales en las que se desarrolla la actividad docente.</p>
+<p>La finalidad de esta programación es proporcionar un marco de referencia coherente, sistemático y verificable para el desarrollo de la actividad docente durante el curso 2026/2027, favorecer una enseñanza planificada y progresiva, garantizar la coherencia entre los distintos elementos curriculares y facilitar el seguimiento del proceso de enseñanza y aprendizaje.</p>
+
+<h3>0.6. Criterios de elaboración y depuración del documento</h3>
+<p>La presente Programación Didáctica ha sido elaborada mediante un proceso de recuperación, revisión, depuración, ordenación y consolidación de contenidos, con el propósito de disponer de un documento único, coherente y técnicamente consistente para el curso académico 2026/2027.</p>
+<p>El criterio fundamental de elaboración es la conservación de los contenidos válidos previamente desarrollados, evitando generar una programación nueva cuando existan contenidos ya elaborados que puedan ser recuperados, revisados y consolidados.</p>
+
+<h4>Criterios de depuración</h4>
+<ul>
+<li><strong>Fidelidad documental:</strong> evitar alterar el sentido de los contenidos recuperados.</li>
+<li><strong>Rigor normativo:</strong> diferenciar las obligaciones derivadas de la normativa de las decisiones de desarrollo pedagógico propias.</li>
+<li><strong>Trazabilidad:</strong> procurar que los elementos relevantes puedan relacionarse con su fuente o con la decisión pedagógica que justifica su incorporación.</li>
+<li><strong>Coherencia interna:</strong> evitar contradicciones entre los distintos elementos de la programación.</li>
+<li><strong>Eliminación de duplicidades:</strong> integrar en una única formulación los contenidos equivalentes.</li>
+<li><strong>Actualización controlada:</strong> incorporar modificaciones únicamente cuando exista base documental suficiente.</li>
+<li><strong>Precisión terminológica:</strong> utilizar de manera consistente los conceptos propios de las Enseñanzas Profesionales de Música.</li>
+<li><strong>Viabilidad pedagógica:</strong> procurar que las propuestas puedan desarrollarse efectivamente.</li>
+<li><strong>Flexibilidad organizativa:</strong> evitar convertir en datos definitivos los aspectos dependientes de la organización del centro.</li>
+<li><strong>Separación entre planificación y programación:</strong> mantener diferenciados los instrumentos de planificación y de programación.</li>
+</ul>
+
+<h3>0.7. Distinción entre normativa, desarrollo propio y evidencias documentales</h3>
+<table>
+<tr><th>Categoría</th><th>Definición</th><th>Función</th></tr>
+<tr><td><span class="tag tag-norm">NORMA VIGENTE</span></td><td>Disposiciones normativas aplicables al curso 2026/2027 y cuya vigencia haya sido comprobada.</td><td>Establece el marco de referencia y las obligaciones aplicables.</td></tr>
+<tr><td><span class="tag tag-of">TEXTO OFICIAL</span></td><td>Contenido reproducido o desarrollado a partir de una fuente oficial identificable.</td><td>Proporciona los referentes curriculares y de evaluación.</td></tr>
+<tr><td><span class="tag tag-dev">DESARROLLO PROPIO</span></td><td>Concreciones, decisiones metodológicas, secuenciaciones y propuestas didácticas elaboradas específicamente.</td><td>Concreta el marco normativo en decisiones pedagógicas y organizativas.</td></tr>
+<tr><td><span class="tag tag-ev">EVIDENCIA</span></td><td>Documento, registro o elemento verificable que permite fundamentar una afirmación, decisión o actuación.</td><td>Permite justificar, acreditar o realizar el seguimiento de las decisiones.</td></tr>
+<tr><td><span class="tag tag-hold">HOLD</span></td><td>Contenido cuya incorporación definitiva queda condicionada a la comprobación de su procedencia, vigencia, aprobación o adecuación.</td><td>Señala los elementos que no pueden presentarse como definitivos.</td></tr>
+</table>
+
+<p>La arquitectura documental de esta programación se establece mediante la siguiente relación:</p>
+<blockquote>
+<strong>NORMATIVA</strong> → establece el marco de referencia y las obligaciones aplicables.<br>
+<strong>DESARROLLO PROPIO</strong> → concreta ese marco en decisiones pedagógicas y organizativas.<br>
+<strong>EVIDENCIA DOCUMENTAL</strong> → permite justificar, acreditar o realizar el seguimiento de dichas decisiones.
+</blockquote>
+
+<!-- ===================== BLOQUE I ===================== -->
+<div class="block-header" id="b1">
+  <h2>Bloque I. Marco normativo</h2>
+</div>
+
+<h3>1.1. Normativa estatal aplicable</h3>
+<p>La presente Programación Didáctica se desarrolla dentro del marco establecido por la legislación educativa estatal vigente y por las disposiciones que regulan las enseñanzas artísticas profesionales, sin perjuicio de las competencias atribuidas a la Comunidad Autónoma de Extremadura en materia de educación.</p>
+<table>
+<tr><th>Disposición</th><th>Concreción</th><th>Estado</th></tr>
+<tr><td>Ley Orgánica 2/2006, de 3 de mayo, de Educación</td><td>Norma básica del sistema educativo, en su redacción vigente.</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Real Decreto 1577/2006, de 22 de diciembre</td><td>Aspectos básicos del currículo de las enseñanzas profesionales de música. Modificado por el Real Decreto 628/2022, de 26 de julio (adaptación de las condiciones de obtención del título de Bachiller y eliminación del libro de calificaciones).</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (HECHO VERIFICADO)</td></tr>
+<tr><td>Normativa estatal de evaluación</td><td>Disposiciones que regulan la evaluación de estas enseñanzas.</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Normativa estatal de atención a la diversidad</td><td>Disposiciones que regulan la respuesta educativa a la diversidad.</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Normativa estatal de organización de centros</td><td>Disposiciones que regulan la organización de los centros docentes.</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+</table>
+
+<h3>1.2. Normativa de la Comunidad Autónoma de Extremadura</h3>
+<p>La presente Programación Didáctica se desarrolla, en el ámbito territorial de la Comunidad Autónoma de Extremadura, de acuerdo con la normativa autonómica que regula la ordenación, el currículo, la evaluación y la organización de las Enseñanzas Profesionales de Música.</p>
+<table>
+<tr><th>Disposición</th><th>Concreción</th><th>Estado</th></tr>
+<tr><td>Decreto 111/2007, de 22 de mayo</td><td>Currículo de las enseñanzas profesionales de música de régimen especial en Extremadura. DOE n.º 61, de 29 de mayo de 2007. Existe un proyecto de Decreto de modificación (fase de consulta pública y audiencia, tramitado en 2023) para adaptar el currículo a la Ley Orgánica 3/2020 (LOMLOE); a la fecha de elaboración de este documento no se ha podido confirmar documentalmente su aprobación y publicación definitiva en el DOE.</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (DATO A CONFIRMAR — verificar aprobación del proyecto de modificación antes del cierre del documento)</td></tr>
+<tr><td>Decreto 228/2014, de 14 de octubre</td><td>Respuesta educativa a la diversidad del alumnado en la Comunidad Autónoma de Extremadura. DOE n.º 202, de 21 de octubre de 2014.</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (HECHO VERIFICADO — confirmado como norma de referencia vigente en fuentes oficiales de la Consejería de Educación y Formación Profesional de Extremadura)</td></tr>
+<tr><td>Ley 11/2014, de 9 de diciembre</td><td>Accesibilidad universal de Extremadura.</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Normativa autonómica de evaluación</td><td>Disposiciones que regulan la evaluación de estas enseñanzas.</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Normativa autonómica de organización</td><td>Disposiciones que regulan la organización de los conservatorios.</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (DATO A CONFIRMAR — identificar la disposición específica vigente)</td></tr>
+</table>
+
+<h3>1.3. Normativa específica de las Enseñanzas Profesionales de Música</h3>
+<p>La referencia normativa específica fundamental para el desarrollo de las Enseñanzas Profesionales de Música en la Comunidad Autónoma de Extremadura es el Decreto 111/2007, de 22 de mayo, por el que se establece el currículo de las enseñanzas profesionales de música de régimen especial reguladas por la Ley Orgánica 2/2006, de 3 de mayo, de Educación.</p>
+<p>El Decreto 111/2007 fue publicado en el Diario Oficial de Extremadura, número 61, de 29 de mayo de 2007, y establece el currículo de estas enseñanzas en el ámbito territorial de la Comunidad Autónoma de Extremadura.</p>
+<p>La disposición establece, entre otros elementos, la finalidad, los objetivos generales y específicos y la ordenación académica de las Enseñanzas Profesionales de Música. Asimismo, determina que estas enseñanzas se organizan en un grado de seis cursos de duración.</p>
+<p><strong>NOTA DE VERIFICACIÓN NORMATIVA (DATO A CONFIRMAR):</strong> Con posterioridad a la aprobación del Decreto 111/2007, la Consejería de Educación de la Junta de Extremadura tramitó un proyecto de Decreto por el que se modifican el Decreto 111/2007, el Decreto 140/2012 (danza), el Decreto 27/2014 y el Decreto 28/2014 (enseñanzas artísticas superiores), con el fin de adaptar dichos currículos a la Ley Orgánica 3/2020 (LOMLOE). Dicho proyecto se encontraba en fase de consulta pública y audiencia durante 2023. A la fecha de elaboración de esta programación no ha podido confirmarse, mediante fuente documental oficial (DOE), su aprobación y entrada en vigor definitivas. En consecuencia, el Decreto 111/2007 se mantiene como referencia aplicable en tanto no conste su modificación o sustitución publicada, pero esta circunstancia debe verificarse directamente en el Diario Oficial de Extremadura antes del cierre definitivo del documento.</p>
+
+<h3>1.4. Normativa sobre evaluación</h3>
+<p>La evaluación de las Enseñanzas Profesionales de Música se desarrollará de acuerdo con la normativa estatal básica y con las disposiciones específicas de la Comunidad Autónoma de Extremadura que resulten aplicables durante el curso académico 2026/2027.</p>
+<p>Como referencia estatal fundamental se tendrá en consideración el Real Decreto 1577/2006, de 22 de diciembre, por el que se fijan los aspectos básicos del currículo de las enseñanzas profesionales de música reguladas por la Ley Orgánica 2/2006, de 3 de mayo, de Educación, en su redacción dada por el Real Decreto 628/2022, de 26 de julio, por el que se modifican varios reales decretos para la aplicación de la Ley Orgánica 3/2020, de 29 de diciembre (LOMLOE), a las enseñanzas artísticas (HECHO VERIFICADO). Dicha modificación afecta, principalmente, a las condiciones de obtención del título de Bachiller por el alumnado que curse Enseñanzas Profesionales de Música y a la supresión del libro de calificaciones, sin alterar los aspectos básicos del currículo relativos a Música de Cámara, Banda y Orquesta que son objeto de esta programación.</p>
+<p>De acuerdo con dicho marco, la evaluación de las Enseñanzas Profesionales de Música se realizará tomando como referencia los objetivos educativos y los criterios de evaluación establecidos en el currículo. La evaluación del aprendizaje tendrá carácter continuo e integrador, aunque diferenciada según las distintas asignaturas del currículo.</p>
+<p>En cuanto a la expresión de los resultados de la evaluación final, el Real Decreto 1577/2006 establece una escala numérica de 1 a 10, sin decimales, considerándose positivas las calificaciones iguales o superiores a cinco.</p>
+
+<h3>1.5. Normativa sobre inclusión y atención a la diversidad</h3>
+<p>La atención a la diversidad y la inclusión educativa constituyen elementos integrantes de la presente Programación Didáctica y se desarrollarán de acuerdo con la legislación educativa estatal y con la normativa específica de la Comunidad Autónoma de Extremadura vigente durante el curso académico 2026/2027.</p>
+<p>En el ámbito autonómico, constituye una referencia específica fundamental el Decreto 228/2014, de 14 de octubre, por el que se regula la respuesta educativa a la diversidad del alumnado en la Comunidad Autónoma de Extremadura, publicado en el Diario Oficial de Extremadura n.º 202, de 21 de octubre de 2014. Su vigencia como norma de referencia ha sido verificada en fuentes oficiales de la Consejería de Educación y Formación Profesional de Extremadura (HECHO VERIFICADO), sin perjuicio de su desarrollo mediante instrucciones anuales de la Secretaría General de Educación.</p>
+<p>Asimismo, se tendrá en consideración la normativa extremeña relativa a la accesibilidad universal, incluida la Ley 11/2014, de 9 de diciembre, de accesibilidad universal de Extremadura, en aquellos aspectos que resulten aplicables al ámbito educativo.</p>
+
+<h3>1.6. Normativa sobre organización y funcionamiento de los centros</h3>
+<p>La organización y el funcionamiento del centro en el que se desarrollan las Enseñanzas Profesionales de Música se ajustarán a la normativa estatal y autonómica vigente y, en particular, a las disposiciones que regulen la organización de los centros docentes, los órganos de gobierno y de coordinación docente, la participación de la comunidad educativa, la planificación académica y las condiciones de desarrollo de la actividad docente.</p>
+<p>Para el curso 2026/2027, deberá atenderse especialmente a las disposiciones anuales que determinan la organización temporal del curso, el calendario escolar y las condiciones de funcionamiento de los centros. La Resolución de 15 de junio de 2026, de la Secretaría General de Educación, por la que se aprueba el calendario escolar para el curso 2026/2027 (publicada en el DOE n.º 116, de 18 de junio de 2026), establece específicamente, en su resuelvo cuarto, que las actividades lectivas correspondientes a las Enseñanzas Elementales y Profesionales de Música y de Danza se iniciarán el 1 de octubre de 2026 y finalizarán el 11 de junio de 2027, con entrega de las calificaciones de la evaluación final ordinaria el 19 de junio de 2027. Para 6.º curso de las Enseñanzas Profesionales, con el fin de permitir la simultaneidad de estudios con las Enseñanzas de Régimen General, las actividades lectivas finalizarán el 7 de mayo de 2027 y la entrega de calificaciones tendrá lugar el 14 de mayo de 2027. Las pruebas de evaluación extraordinarias se celebrarán entre el 1 y el 3 de septiembre de 2027 (HECHO VERIFICADO, contrastado con el texto publicado en el Diario Oficial de Extremadura).</p>
+<p>Asimismo, la propia Resolución fija, entre las festividades y días no lectivos del curso 2026/2027, el 23 de noviembre de 2026 (Día de Santa Cecilia) como día no lectivo específico para los Conservatorios Oficiales de Música, y excluye a estos centros del carácter no lectivo del 29 de enero de 2027 (Día del Docente). Esta precisión, directamente aplicable a las materias de Música de Cámara, Banda y Orquesta, deberá incorporarse al calendario de actividades del centro (Bloque VIII) para su correcta planificación.</p>
+
+<h3>1.7. Aplicación de la normativa al curso 2026/2027</h3>
+<p>La presente Programación Didáctica se aplicará durante el curso académico 2026/2027 de acuerdo con el conjunto de disposiciones estatales y autonómicas que resulten vigentes y aplicables a las Enseñanzas Profesionales de Música en la Comunidad Autónoma de Extremadura.</p>
+<p>La aplicación de la normativa se realizará atendiendo a la jerarquía normativa, el ámbito material y territorial de cada disposición y su vigencia temporal, diferenciando entre las normas de carácter permanente y aquellas disposiciones cuya aplicación se limite específicamente al curso académico 2026/2027.</p>
+<p>De acuerdo con la Resolución de 15 de junio de 2026 (DOE n.º 116), cuyos términos se detallan en el apartado 1.6, las actividades lectivas de las Enseñanzas Elementales y Profesionales de Música se desarrollarán desde el 1 de octubre de 2026 hasta el 11 de junio de 2027, con la particularidad de que para 6.º curso de las Enseñanzas Profesionales de Música las actividades lectivas finalizarán el 7 de mayo de 2027.</p>
+
+<h3>1.8. Criterio de jerarquía normativa y control de vigencia</h3>
+<p>La presente Programación Didáctica se elaborará, aplicará y revisará de acuerdo con el principio de jerarquía normativa, de manera que ninguna concreción pedagógica, organizativa o evaluativa propia de este documento pueda contradecir las disposiciones de rango superior que resulten aplicables.</p>
+<p>Orden general de referencia:</p>
+<ol>
+<li>Constitución Española y normativa de rango constitucional aplicable.</li>
+<li>Normativa estatal con rango de ley.</li>
+<li>Normativa reglamentaria estatal.</li>
+<li>Normativa de la Comunidad Autónoma de Extremadura con rango de ley.</li>
+<li>Normativa reglamentaria de la Comunidad Autónoma de Extremadura.</li>
+<li>Disposiciones administrativas y resoluciones de aplicación al curso 2026/2027.</li>
+<li>Documentos institucionales del centro.</li>
+<li>Programación Didáctica.</li>
+<li>Decisiones metodológicas, organizativas y didácticas del profesorado.</li>
+</ol>
+
+<!-- ===================== BLOQUE II ===================== -->
+<div class="block-header" id="b2">
+  <h2>Bloque II. Contextualización</h2>
+</div>
+
+<h3>2.1. Música de Cámara</h3>
+<p>La materia de Música de Cámara constituye uno de los referentes curriculares de las Enseñanzas Profesionales de Música y se integra en la formación musical del alumnado como espacio específico de práctica interpretativa colectiva.</p>
+<p>Su referente curricular se establece, en primer término, en la normativa básica estatal aplicable a las Enseñanzas Profesionales de Música. El Real Decreto 1577/2006, de 22 de diciembre, incluye la Música de Cámara entre las asignaturas propias de determinadas especialidades instrumentales y establece que las Administraciones educativas desarrollarán el currículo incorporando los aspectos básicos fijados por la normativa estatal.</p>
+<p>Desde el punto de vista formativo, Música de Cámara se concibe como un ámbito de aprendizaje en el que la interpretación colectiva permite integrar conocimientos, destrezas y actitudes desarrollados en otras materias y aplicarlos a una situación musical compartida.</p>
+
+<h3>2.2. Banda</h3>
+<p>La materia de Banda constituye un ámbito específico de práctica instrumental colectiva dentro de las Enseñanzas Profesionales de Música. Su finalidad formativa se vincula al desarrollo progresivo de las capacidades necesarias para participar de manera activa, responsable y musicalmente fundamentada en una agrupación instrumental de estas características.</p>
+<p>La práctica de Banda permite superar la dimensión exclusivamente individual del aprendizaje instrumental y situar al alumnado ante una experiencia interpretativa en la que cada integrante debe coordinar su actuación con el conjunto.</p>
+
+<h3>2.3. Orquesta</h3>
+<p>La materia de Orquesta constituye un ámbito específico de práctica instrumental colectiva dentro de las Enseñanzas Profesionales de Música. Su incorporación al currículo responde a la necesidad de complementar la formación instrumental individual mediante experiencias de interpretación conjunta.</p>
+<p>La práctica orquestal exige una integración progresiva de la técnica instrumental individual en un contexto sonoro colectivo. El alumnado deberá aprender a mantener el control de su propia ejecución mientras escucha simultáneamente las restantes partes.</p>
+
+<h3>2.4. Finalidades formativas comunes</h3>
+<p>Las materias de Música de Cámara, Banda y Orquesta comparten una finalidad formativa esencial: integrar los aprendizajes desarrollados en la formación instrumental individual dentro de experiencias de interpretación colectiva.</p>
+<ul>
+<li><strong>a)</strong> Integración de la formación instrumental individual en la práctica colectiva.</li>
+<li><strong>b)</strong> Desarrollo de la escucha activa.</li>
+<li><strong>c)</strong> Desarrollo de la coordinación musical.</li>
+<li><strong>d)</strong> Desarrollo de la afinación y del equilibrio sonoro.</li>
+<li><strong>e)</strong> Desarrollo de la precisión rítmica y de la estabilidad del pulso.</li>
+<li><strong>f)</strong> Desarrollo de la interpretación musical.</li>
+<li><strong>g)</strong> Comprensión de la función individual dentro del conjunto.</li>
+<li><strong>h)</strong> Desarrollo de la autonomía.</li>
+<li><strong>i)</strong> Desarrollo de la responsabilidad individual.</li>
+<li><strong>j)</strong> Desarrollo de la cooperación.</li>
+<li><strong>k)</strong> Desarrollo de la comunicación musical.</li>
+<li><strong>l)</strong> Desarrollo de la capacidad de adaptación.</li>
+<li><strong>m)</strong> Desarrollo de la capacidad de análisis.</li>
+<li><strong>n)</strong> Desarrollo de la capacidad de autorregulación.</li>
+<li><strong>o)</strong> Desarrollo de la convivencia musical.</li>
+<li><strong>p)</strong> Preparación para la interpretación pública.</li>
+<li><strong>q)</strong> Conocimiento y valoración del repertorio.</li>
+<li><strong>r)</strong> Desarrollo de la sensibilidad artística.</li>
+<li><strong>s)</strong> Uso responsable de recursos y tecnologías.</li>
+<li><strong>t)</strong> Preparación para la continuidad formativa y artística.</li>
+</ul>
+
+<h3>2.5. Particularidades de cada agrupación</h3>
+<h4>Música de Cámara</h4>
+<p>Se caracteriza por una dimensión de conjunto que permite una interacción especialmente directa entre los intérpretes. La responsabilidad musical de cada participante adquiere un peso significativo.</p>
+
+<h4>Banda</h4>
+<p>Presenta una dimensión de conjunto que permite trabajar la integración de diferentes familias instrumentales de viento y percusión dentro de una organización sonora amplia.</p>
+
+<h4>Orquesta</h4>
+<p>Presenta una estructura instrumental caracterizada por la interacción entre diferentes familias y secciones, con una organización sonora y funcional que requiere una elevada capacidad de escucha global y de comprensión de la partitura.</p>
+
+<h3>2.6. Características generales del alumnado</h3>
+<p>El alumnado destinatario de esta Programación Didáctica se encuentra escolarizado en las Enseñanzas Profesionales de Música, dentro de las materias de Música de Cámara, Banda y Orquesta, durante el curso académico 2026/2027.</p>
+<p>Las características concretas del alumnado y de cada grupo deberán determinarse a partir de la realidad efectiva del centro al inicio del curso y de la información académica y pedagógica disponible.</p>
+
+<h3>2.7. Recursos humanos y materiales</h3>
+<p>El desarrollo de las materias de Música de Cámara, Banda y Orquesta requiere la adecuada articulación de los recursos humanos, materiales, espaciales, documentales y tecnológicos disponibles en el centro.</p>
+
+<h3>2.8. Espacios y condiciones de desarrollo de la actividad</h3>
+<p>El desarrollo de las materias requiere espacios y condiciones de trabajo adecuados a las características de la interpretación instrumental colectiva. La organización de los espacios deberá favorecer simultáneamente el aprendizaje musical, la seguridad, la comunicación entre los integrantes de la agrupación, la escucha colectiva, la movilidad y el desarrollo progresivo de la autonomía del alumnado.</p>
+
+<h3>2.9. Coordinación con el departamento y el centro</h3>
+<p>La coordinación constituye un elemento necesario para garantizar la coherencia entre la programación didáctica, la organización del centro y el desarrollo efectivo de las materias de Música de Cámara, Banda y Orquesta.</p>
+
+<!-- ===================== BLOQUE III ===================== -->
+<div class="block-header" id="b3">
+  <h2>Bloque III. Principios y finalidades educativas</h2>
+</div>
+
+<h3>3.1. Formación musical integral</h3>
+<p>La formación musical integral constituye uno de los principios pedagógicos fundamentales de esta Programación Didáctica. En las materias de Música de Cámara, Banda y Orquesta, la educación musical no se limita al dominio técnico del instrumento ni al resultado de una interpretación concreta, sino que integra dimensiones técnicas, musicales, interpretativas, cognitivas, personales y sociales.</p>
+
+<h3>3.2. Interpretación colectiva como experiencia educativa</h3>
+<p>La interpretación colectiva constituye uno de los principios pedagógicos centrales de las materias de Música de Cámara, Banda y Orquesta. No se entiende únicamente como la ejecución conjunta de un repertorio, sino como una experiencia educativa en la que el alumnado aprende a integrar sus capacidades individuales dentro de una producción musical compartida.</p>
+
+<h3>3.3. Escucha activa y responsabilidad compartida</h3>
+<p>La escucha activa y la responsabilidad compartida constituyen principios pedagógicos esenciales para el desarrollo de las materias. La práctica colectiva exige que cada alumno o alumna mantenga una atención consciente tanto sobre su propia interpretación como sobre el comportamiento musical del conjunto.</p>
+
+<h3>3.4. Autonomía progresiva</h3>
+<p>La autonomía progresiva constituye un principio pedagógico fundamental. Se entiende como el desarrollo gradual de la capacidad del alumnado para preparar su trabajo, comprender las exigencias musicales de una actividad, tomar decisiones fundamentadas, resolver dificultades, regular su propia práctica y participar responsablemente en la construcción de una interpretación colectiva.</p>
+
+<h3>3.5. Desarrollo técnico, musical y artístico</h3>
+<p>El desarrollo técnico, musical y artístico constituye un principio pedagógico integrado. La formación del alumnado debe favorecer la evolución coordinada de las capacidades necesarias para realizar una interpretación técnicamente solvente, musicalmente comprendida y artísticamente comunicativa.</p>
+
+<h3>3.6. Educación para la convivencia y el trabajo cooperativo</h3>
+<p>La educación para la convivencia y el trabajo cooperativo constituye un principio pedagógico especialmente relevante en las materias de Música de Cámara, Banda y Orquesta, debido a su carácter esencialmente colectivo.</p>
+
+<h3>3.7. Inclusión y atención a las diferencias individuales</h3>
+<p>La inclusión y la atención a las diferencias individuales constituyen un principio pedagógico transversal. La programación debe garantizar que la diversidad del alumnado sea considerada en la planificación, desarrollo, seguimiento y evaluación de los procesos de enseñanza y aprendizaje.</p>
+
+<h3>3.8. Uso responsable de recursos tecnológicos</h3>
+<p>El uso de recursos tecnológicos constituye un apoyo pedagógico complementario. Su incorporación se plantea desde una perspectiva funcional, crítica, responsable y vinculada a las necesidades reales del aprendizaje musical.</p>
+
+<h3>3.9. Finalidades de la programación</h3>
+<h4>Finalidad formativa</h4>
+<p>Organizar y orientar un proceso de enseñanza y aprendizaje que contribuya al desarrollo integral del alumnado mediante la práctica musical colectiva.</p>
+<h4>Finalidad artística</h4>
+<p>Favorecer el desarrollo progresivo de la sensibilidad, la comprensión y la capacidad de expresión musical del alumnado mediante la interpretación colectiva de obras y repertorios.</p>
+<h4>Finalidad interpretativa</h4>
+<p>Desarrollar progresivamente la capacidad del alumnado para transformar los conocimientos musicales, los recursos técnicos y la comprensión artística de una obra en una interpretación consciente, coherente y adaptada a las características de la agrupación.</p>
+<h4>Finalidad competencial</h4>
+<p>Favorecer que el alumnado movilice de manera integrada los conocimientos, destrezas, actitudes y recursos adquiridos para afrontar situaciones musicales reales.</p>
+<h4>Finalidad preparatoria para la continuidad de estudios y la práctica musical</h4>
+<p>Proporcionar al alumnado una formación que le permita continuar desarrollando su trayectoria musical, tanto en el ámbito académico como en el de la práctica musical.</p>
+
+<!-- ===================== BLOQUE IV ===================== -->
+<div class="block-header" id="b4">
+  <h2>Bloque IV. Objetivos</h2>
+</div>
+
+<h3>4.1. Objetivos comunes</h3>
+<p>Al finalizar el proceso formativo correspondiente, se pretende que el alumnado sea capaz de:</p>
+<ol>
+<li>Integrarse progresivamente en una agrupación instrumental, comprendiendo la función que desempeña su instrumento dentro del conjunto y asumiendo la responsabilidad individual que corresponde a dicha función.</li>
+<li>Interpretar repertorio colectivo aplicando de manera integrada los conocimientos musicales, los recursos técnicos y los criterios interpretativos trabajados.</li>
+<li>Desarrollar una escucha activa que permita percibir simultáneamente la propia interpretación y el resultado del conjunto.</li>
+<li>Mantener una adecuada coordinación rítmica con el resto de intérpretes.</li>
+<li>Desarrollar progresivamente un control consciente de la afinación, calidad sonora, articulación, dinámica, timbre y equilibrio.</li>
+<li>Adaptar la propia interpretación a las características acústicas, musicales e instrumentales del conjunto.</li>
+<li>Comprender la estructura, el discurso musical, el carácter y los principales elementos estilísticos del repertorio trabajado.</li>
+<li>Aplicar criterios de fraseo, articulación, dinámica, agógica, timbre y expresión adecuados a las características de las obras.</li>
+<li>Desarrollar la capacidad para seguir y utilizar adecuadamente las referencias de dirección y las referencias colectivas.</li>
+<li>Participar activamente en los ensayos, comprendiendo el ensayo como una situación de aprendizaje.</li>
+<li>Desarrollar estrategias progresivamente autónomas para preparar individualmente el repertorio.</li>
+<li>Resolver dificultades técnicas, rítmicas, musicales e interpretativas mediante procedimientos sistemáticos.</li>
+<li>Desarrollar hábitos de estudio y preparación que permitan afrontar de manera responsable las actividades de interpretación colectiva.</li>
+<li>Participar en procesos de autoevaluación y reflexión sobre la propia interpretación.</li>
+<li>Valorar críticamente el resultado de una interpretación.</li>
+<li>Desarrollar progresivamente la autonomía necesaria para tomar decisiones musicales fundamentadas.</li>
+<li>Participar de forma responsable y cooperativa en el trabajo colectivo.</li>
+<li>Desarrollar habilidades de comunicación musical e interpersonal.</li>
+<li>Gestionar de manera educativa las dificultades, errores y desacuerdos.</li>
+<li>Mantener una actitud de respeto hacia las personas, instrumentos, partituras, espacios y normas.</li>
+<li>Desarrollar una sensibilidad artística que permita comprender la interpretación como construcción y comunicación.</li>
+<li>Participar en situaciones de interpretación pública aplicando los recursos trabajados.</li>
+<li>Utilizar de manera responsable los recursos tecnológicos y audiovisuales.</li>
+<li>Utilizar de forma crítica y responsable la información y los recursos musicales disponibles.</li>
+<li>Desarrollar la capacidad para transferir estrategias a nuevos repertorios y situaciones musicales.</li>
+<li>Valorar la práctica musical colectiva como espacio de aprendizaje, expresión artística, cooperación y desarrollo personal.</li>
+</ol>
+
+<h3>4.2. Objetivos específicos de Música de Cámara</h3>
+<p>Se pretende que el alumnado sea capaz de:</p>
+<ol>
+<li>Integrarse activamente en una agrupación de Música de Cámara.</li>
+<li>Asumir con responsabilidad la función que desempeña dentro del conjunto.</li>
+<li>Desarrollar una escucha horizontal que permita percibir simultáneamente la propia interpretación y las intervenciones de las demás voces.</li>
+<li>Coordinar entradas, finales, cambios de tempo, respiraciones, articulaciones y demás referencias.</li>
+<li>Adaptar la propia interpretación a las características musicales de las otras partes.</li>
+<li>Desarrollar una afinación adecuada al contexto camerístico.</li>
+<li>Contribuir a la construcción de un equilibrio sonoro.</li>
+<li>Comprender las relaciones entre las distintas partes de una obra.</li>
+<li>Reconocer los diferentes planos sonoros y adaptar la propia presencia sonora.</li>
+<li>Desarrollar criterios de fraseo compartidos.</li>
+<li>Participar activamente en la construcción de decisiones interpretativas.</li>
+<li>Desarrollar procedimientos de comunicación musical.</li>
+<li>Utilizar referencias visuales, gestuales, respiratorias, auditivas y estructurales.</li>
+<li>Preparar individualmente las partes del repertorio.</li>
+<li>Identificar las dificultades que puedan afectar al conjunto y participar en su resolución.</li>
+<li>Desarrollar estrategias de ensayo eficaces.</li>
+<li>Mantener la continuidad musical ante errores o incidencias.</li>
+<li>Desarrollar la capacidad para tomar decisiones interpretativas fundamentadas.</li>
+<li>Participar en procesos de autoevaluación y coevaluación.</li>
+<li>Utilizar la grabación y otros recursos tecnológicos como herramientas de análisis.</li>
+<li>Desarrollar una interpretación sensible a las características estilísticas, formales y expresivas.</li>
+<li>Integrar articulación, dinámica, timbre, fraseo, agógica y carácter en una interpretación coherente.</li>
+<li>Desarrollar capacidad para justificar musicalmente las decisiones interpretativas.</li>
+<li>Resolver de manera constructiva las diferencias interpretativas.</li>
+<li>Desarrollar actitudes de respeto, responsabilidad, cooperación y escucha interpersonal.</li>
+<li>Participar en interpretaciones públicas con preparación, concentración y capacidad de adaptación.</li>
+<li>Valorar el trabajo camerístico como experiencia de aprendizaje artístico.</li>
+<li>Transferir los procedimientos adquiridos a nuevos repertorios y configuraciones.</li>
+</ol>
+
+<h3>4.3. Objetivos específicos de Banda</h3>
+<p>Se pretende que el alumnado sea capaz de:</p>
+<ol>
+<li>Integrarse activamente en una agrupación de Banda.</li>
+<li>Comprender la función de su instrumento y de su sección dentro del conjunto.</li>
+<li>Preparar individualmente las partes del repertorio con un grado progresivo de autonomía.</li>
+<li>Desarrollar una escucha activa que permita relacionar la propia interpretación con la sección y con el conjunto.</li>
+<li>Mantener un pulso estable y coordinarse con las referencias rítmicas comunes.</li>
+<li>Ejecutar con precisión entradas, cortes, cambios de tempo, articulaciones y dinámicas.</li>
+<li>Desarrollar una afinación adecuada al contexto de Banda.</li>
+<li>Contribuir a la construcción de un sonido homogéneo dentro de la propia sección.</li>
+<li>Adaptar las características del sonido individual a las necesidades de la sección y del conjunto.</li>
+<li>Desarrollar la capacidad para mantener un equilibrio adecuado entre las diferentes secciones.</li>
+<li>Reconocer los diferentes planos sonoros y adaptar la presencia sonora propia.</li>
+<li>Comprender las relaciones entre las diferentes partes instrumentales.</li>
+<li>Responder adecuadamente a las referencias de dirección.</li>
+<li>Utilizar referencias visuales, gestuales, auditivas, rítmicas y estructurales.</li>
+<li>Desarrollar una articulación suficientemente coordinada dentro de las secciones.</li>
+<li>Aplicar criterios de dinámica y balance adecuados a la función de cada parte.</li>
+<li>Comprender la estructura, el carácter, el estilo y las características musicales del repertorio.</li>
+<li>Integrar fraseo, articulación, dinámica, agógica, timbre y carácter en una interpretación coherente.</li>
+<li>Participar activamente en los ensayos de sección y de conjunto.</li>
+<li>Identificar problemas de coordinación, afinación, ritmo, articulación, equilibrio o interpretación.</li>
+<li>Desarrollar estrategias diferenciadas para abordar problemas.</li>
+<li>Mantener la continuidad musical ante errores o incidencias.</li>
+<li>Desarrollar la capacidad para tomar decisiones interpretativas ajustadas a la función.</li>
+<li>Participar en procesos de autoevaluación y coevaluación.</li>
+<li>Utilizar grabaciones y otros recursos tecnológicos como herramientas de mejora.</li>
+<li>Desarrollar hábitos de responsabilidad en relación con el instrumento, partituras y materiales.</li>
+<li>Participar de manera cooperativa en el trabajo de sección y de conjunto.</li>
+<li>Desarrollar una actitud de atención y respuesta adecuada durante los ensayos.</li>
+<li>Participar en interpretaciones públicas aplicando los recursos trabajados.</li>
+<li>Valorar la práctica de Banda como experiencia de aprendizaje musical, cooperación y responsabilidad.</li>
+<li>Transferir los procedimientos adquiridos a nuevos repertorios y situaciones.</li>
+</ol>
+
+<h3>4.4. Objetivos específicos de Orquesta</h3>
+<p>Se pretende que el alumnado sea capaz de:</p>
+<ol>
+<li>Integrarse activamente en una agrupación orquestal.</li>
+<li>Comprender la función de su instrumento dentro de la sección, familia y conjunto.</li>
+<li>Asumir la responsabilidad individual correspondiente a la preparación y ejecución de la parte.</li>
+<li>Preparar individualmente el repertorio orquestal con un grado progresivo de autonomía.</li>
+<li>Desarrollar una escucha activa y global.</li>
+<li>Mantener una referencia rítmica estable y coordinarse con las diferentes partes.</li>
+<li>Ejecutar con precisión entradas, cortes, cambios de tempo, articulaciones y dinámicas.</li>
+<li>Desarrollar una afinación adecuada al contexto orquestal.</li>
+<li>Adaptar el sonido individual a las características de la sección, familia y conjunto.</li>
+<li>Comprender la relación entre las diferentes familias instrumentales.</li>
+<li>Reconocer los diferentes planos sonoros de la textura orquestal.</li>
+<li>Identificar funciones melódicas, armónicas, rítmicas, de acompañamiento y otras.</li>
+<li>Comprender la relación entre las diferentes líneas instrumentales.</li>
+<li>Responder adecuadamente a las referencias de dirección.</li>
+<li>Utilizar referencias visuales, gestuales, auditivas, rítmicas y estructurales.</li>
+<li>Desarrollar una articulación coordinada dentro de las secciones y familias.</li>
+<li>Aplicar criterios de dinámica y balance adecuados a la función de cada parte.</li>
+<li>Adaptar timbre, intensidad, articulación, afinación y calidad sonora a cada contexto.</li>
+<li>Comprender la estructura, el carácter, el estilo y las características musicales del repertorio.</li>
+<li>Integrar fraseo, articulación, dinámica, agógica, timbre, carácter y función instrumental.</li>
+<li>Participar activamente en ensayos de sección, parciales y generales.</li>
+<li>Identificar problemas de afinación, coordinación, ritmo, articulación, balance, escucha o interpretación.</li>
+<li>Seleccionar estrategias de trabajo adecuadas a la naturaleza de las dificultades.</li>
+<li>Mantener la continuidad musical ante errores o incidencias.</li>
+<li>Desarrollar la capacidad para tomar decisiones interpretativas ajustadas a la función.</li>
+<li>Comprender la relación entre preparación individual, trabajo de sección, familia y resultado orquestal.</li>
+<li>Participar en procesos de autoevaluación y coevaluación.</li>
+<li>Utilizar grabaciones y otros recursos tecnológicos como herramientas de mejora.</li>
+<li>Desarrollar hábitos de responsabilidad en relación con el instrumento, partituras y materiales.</li>
+<li>Participar de manera cooperativa en el trabajo de sección, familia y conjunto.</li>
+<li>Participar en interpretaciones públicas aplicando los recursos trabajados.</li>
+<li>Valorar la práctica orquestal como experiencia de aprendizaje musical, cooperación y responsabilidad.</li>
+<li>Transferir los procedimientos adquiridos a nuevos repertorios y situaciones.</li>
+</ol>
+
+<h3>4.5. Objetivos por niveles/cursos</h3>
+<h4>4.5.1. Primer curso</h4>
+<p>En 1.º curso, los objetivos se aplican exclusivamente a Banda y Orquesta. Música de Cámara no se desarrolla en este curso.</p>
+<p><strong>Objetivos de 1.º de Banda y Orquesta:</strong> integración progresiva en la agrupación, preparación individual básica, escucha activa inicial, mantenimiento del pulso, ejecución de entradas y cortes, desarrollo de hábitos iniciales de afinación, adaptación básica de dinámica y articulación, reconocimiento de funciones básicas, respuesta a indicaciones de dirección, participación en ensayos, identificación de dificultades sencillas, mantenimiento de la continuidad, comprensión inicial del repertorio, desarrollo de hábitos de responsabilidad, participación cooperativa, uso responsable de recursos, participación en actividades interpretativas, inicio de procesos de autoevaluación y valoración de la práctica colectiva.</p>
+
+<h4>4.5.2. Segundo curso</h4>
+<p>Consolidación de los aprendizajes iniciados en 1.º y avance hacia una participación más consciente, coordinada y progresivamente autónoma.</p>
+
+<h4>4.5.3. Tercer curso</h4>
+<p>Fase de consolidación y ampliación de la autonomía funcional. El alumnado deberá ser capaz de anticipar referencias, relacionar su intervención con diferentes secciones, comprender con mayor precisión su función musical, seleccionar procedimientos de resolución y comprobar de forma sistemática sus resultados.</p>
+
+<h4>4.5.4. Cuarto curso</h4>
+<p>Punto de transición. Se incorpora Música de Cámara. Se avanza hacia una participación musical más autónoma, consciente y fundamentada.</p>
+
+<h4>4.5.5. Quinto curso</h4>
+<p>Fase avanzada de consolidación de la práctica colectiva. El alumnado deberá mostrar una mayor capacidad para preparar autónomamente sus partes, comprender la función musical que desempeña, anticipar situaciones interpretativas, adaptar su ejecución y participar de forma fundamentada en la construcción del resultado artístico.</p>
+
+<h4>4.5.6. Sexto curso</h4>
+<p>Nivel máximo de autonomía funcional, responsabilidad interpretativa, adaptación flexible, fundamentación de decisiones musicales y transferencia de procedimientos a nuevos repertorios, configuraciones y situaciones interpretativas.</p>
+<p><strong>Objetivos comunes de 6.º curso:</strong></p>
+<ol>
+<li>Preparar las partes asignadas antes del ensayo, llegando con las notas, ritmos, articulaciones, dinámicas y principales dificultades trabajadas.</li>
+<li>Mantener durante la interpretación las entradas, cortes, ritmo, afinación, articulación y dinámicas indicadas en la partitura.</li>
+<li>Modificar durante el ensayo los parámetros musicales que requieran ajuste, aplicando las indicaciones recibidas y comprobando el resultado.</li>
+<li>Proponer decisiones interpretativas y justificarlas mediante referencias concretas.</li>
+<li>Identificar una dificultad concreta, aplicar una estrategia para resolverla y comprobar su resultado.</li>
+<li>Aplicar un procedimiento de preparación o ensayo utilizado anteriormente a un pasaje, obra o situación musical nueva.</li>
+</ol>
+
+<!-- ===================== BLOQUE V ===================== -->
+<div class="block-header" id="b5">
+  <h2>Bloque V. Competencias y desarrollo competencial</h2>
+</div>
+
+<h3>5.1. Competencias musicales</h3>
+<table>
+<tr><th>Código</th><th>Competencia</th><th>Manifestación</th></tr>
+<tr><td>CM-1</td><td>Ejecución instrumental</td><td>Aplica los recursos técnicos necesarios para interpretar su parte dentro del conjunto.</td></tr>
+<tr><td>CM-2</td><td>Competencia rítmica y de coordinación</td><td>Mantiene y adapta la organización temporal de su intervención.</td></tr>
+<tr><td>CM-3</td><td>Competencia auditiva y de ajuste sonoro</td><td>Utiliza la escucha para modificar su propia interpretación.</td></tr>
+<tr><td>CM-4</td><td>Competencia de interpretación musical</td><td>Transforma la información de la partitura en una interpretación coherente.</td></tr>
+<tr><td>CM-5</td><td>Competencia de interacción musical</td><td>Coordina su actuación con los demás intérpretes.</td></tr>
+<tr><td>CM-6</td><td>Competencia de análisis y resolución musical</td><td>Identifica dificultades y aplica procedimientos para resolverlas.</td></tr>
+<tr><td>CM-7</td><td>Competencia de transferencia musical</td><td>Aplica procedimientos aprendidos a nuevas situaciones.</td></tr>
+</table>
+
+<h3>5.2. Competencias interpretativas</h3>
+<table>
+<tr><th>Código</th><th>Competencia</th><th>Manifestación</th></tr>
+<tr><td>CI-1</td><td>Comprensión del discurso musical</td><td>Identifica los elementos estructurales y expresivos necesarios.</td></tr>
+<tr><td>CI-2</td><td>Construcción de decisiones interpretativas</td><td>Formula y aplica decisiones interpretativas relacionadas con la obra.</td></tr>
+<tr><td>CI-3</td><td>Adaptación interpretativa al conjunto</td><td>Modifica su interpretación para mantener la coherencia con el conjunto.</td></tr>
+<tr><td>CI-4</td><td>Comunicación artística</td><td>Comunica mediante la interpretación el carácter y el discurso musical.</td></tr>
+<tr><td>CI-5</td><td>Coherencia interpretativa</td><td>Mantiene relaciones coherentes entre las decisiones adoptadas.</td></tr>
+<tr><td>CI-6</td><td>Revisión de la interpretación</td><td>Evalúa el resultado interpretativo y utiliza la información para mejorar.</td></tr>
+</table>
+
+<h3>5.3. Competencias personales y sociales</h3>
+<table>
+<tr><th>Código</th><th>Competencia</th><th>Manifestación</th></tr>
+<tr><td>CPS-1</td><td>Responsabilidad individual</td><td>Prepara y cumple las tareas asignadas.</td></tr>
+<tr><td>CPS-2</td><td>Participación y compromiso</td><td>Participa activamente en las actividades colectivas.</td></tr>
+<tr><td>CPS-3</td><td>Cooperación</td><td>Trabaja con otras personas para alcanzar objetivos musicales compartidos.</td></tr>
+<tr><td>CPS-4</td><td>Comunicación y convivencia musical</td><td>Respeta las normas y se comunica adecuadamente.</td></tr>
+<tr><td>CPS-5</td><td>Gestión de dificultades e incidencias</td><td>Identifica dificultades y aplica procedimientos.</td></tr>
+<tr><td>CPS-6</td><td>Responsabilidad compartida</td><td>Cumple su función y contribuye al funcionamiento del conjunto.</td></tr>
+</table>
+
+<h3>5.4. Competencia de autonomía y aprendizaje</h3>
+<table>
+<tr><th>Código</th><th>Competencia</th><th>Manifestación</th></tr>
+<tr><td>CA-1</td><td>Planificación</td><td>Organiza su preparación, identifica dificultades y selecciona procedimientos.</td></tr>
+<tr><td>CA-2</td><td>Aplicación</td><td>Aplica procedimientos de preparación, ensayo y resolución.</td></tr>
+<tr><td>CA-3</td><td>Comprobación</td><td>Comprueba la eficacia de los procedimientos aplicados.</td></tr>
+<tr><td>CA-4</td><td>Ajuste</td><td>Modifica su actuación a partir de la información obtenida.</td></tr>
+<tr><td>CA-5</td><td>Transferencia</td><td>Aplica procedimientos aprendidos a nuevas situaciones musicales.</td></tr>
+</table>
+
+<h3>5.5. Competencia digital</h3>
+<table>
+<tr><th>Código</th><th>Competencia</th><th>Manifestación</th></tr>
+<tr><td>CD-1</td><td>Búsqueda y selección de información musical</td><td>Localiza, selecciona y contrasta información digital.</td></tr>
+<tr><td>CD-2</td><td>Uso funcional de herramientas digitales</td><td>Utiliza recursos digitales para apoyar la práctica musical.</td></tr>
+<tr><td>CD-3</td><td>Creación y gestión de evidencias digitales</td><td>Genera, organiza y utiliza evidencias digitales.</td></tr>
+<tr><td>CD-4</td><td>Seguridad, privacidad y derechos</td><td>Utiliza los recursos digitales de forma responsable.</td></tr>
+<tr><td>CD-5</td><td>Valoración crítica de contenidos digitales</td><td>Contrasta la información digital antes de incorporarla.</td></tr>
+</table>
+
+<h3>5.6. Relación entre competencias, actividades y evaluación</h3>
+<p>La arquitectura terminológica común de este bloque es:</p>
+<blockquote>
+<strong>COMPETENCIA → INDICADOR → DESEMPEÑO OBSERVABLE → ACTIVIDAD → EVIDENCIA → INSTRUMENTO → REGISTRO → RETROALIMENTACIÓN → MEJORA</strong>
+</blockquote>
+
+<!-- ===================== BLOQUE VI ===================== -->
+<div class="block-header" id="b6">
+  <h2>Bloque VI. Contenidos y saberes</h2>
+</div>
+
+<h3>6.1. Técnica instrumental aplicada al conjunto</h3>
+<p>La técnica instrumental, en el contexto de Música de Cámara, Banda y Orquesta, se entiende como el conjunto de recursos técnicos que permiten al alumnado realizar su función musical dentro de una agrupación y ponerla al servicio de una interpretación colectiva coherente.</p>
+<p>Contenidos: preparación técnica de la parte; emisión y calidad del sonido; respiración y apoyo; articulación; coordinación de dedos y mecanismos; digitaciones; flexibilidad; cambios de registro; afinación; control de la intensidad; regularidad rítmica; resistencia; precisión en entradas y cortes; preparación de pasajes técnicamente exigentes.</p>
+
+<h3>6.2. Afinación</h3>
+<p>La afinación constituye un contenido fundamental de la interpretación colectiva. Su aprendizaje se aborda desde una perspectiva auditiva, técnica y musical.</p>
+<p>Contenidos: escucha y percepción de la afinación; afinación individual y colectiva; ajuste de la afinación; afinación y dinámica; afinación y equilibrio sonoro; afinación y articulación; afinación en el repertorio.</p>
+
+<h3>6.3. Sonido y calidad tímbrica</h3>
+<p>El sonido y la calidad tímbrica constituyen contenidos esenciales de la interpretación colectiva. Su tratamiento didáctico parte de la relación entre producción sonora, escucha, control técnico, función musical y adaptación al conjunto.</p>
+<p>Contenidos: producción y estabilidad del sonido; calidad tímbrica; sonido individual y sonido colectivo; homogeneidad y diversidad tímbrica; sonido, dinámica y proyección; sonido y función musical; escucha y ajuste tímbrico.</p>
+
+<h3>6.4. Ritmo y precisión colectiva</h3>
+<p>El ritmo y la precisión colectiva se trabajan como una competencia práctica que permite mantener una referencia temporal compartida, coordinar las intervenciones individuales y asegurar la coherencia del conjunto.</p>
+<p>Contenidos: pulso, tempo y estabilidad temporal; coordinación de entradas, cortes y silencios; subdivisión y organización interna del ritmo; coordinación entre partes; ritmo, articulación y carácter; ritmo y dirección; precisión colectiva y escucha.</p>
+
+<h3>6.5. Escucha y equilibrio sonoro</h3>
+<p>La escucha y el equilibrio sonoro constituyen contenidos esenciales de la interpretación colectiva. La escucha se entiende como una actividad activa, selectiva y orientada a la toma de decisiones interpretativas.</p>
+<p>Contenidos: escucha individual y escucha colectiva; equilibrio entre las partes; escucha de planos y funciones musicales; ajuste de la propia intervención; equilibrio, dinámica y estructura musical; equilibrio y espacio acústico; escucha, comunicación y toma de decisiones.</p>
+
+<h3>6.6. Articulación y dinámica</h3>
+<p>La articulación y la dinámica constituyen contenidos esenciales para la construcción de una interpretación musical coherente y para la integración de las diferentes partes dentro del conjunto.</p>
+<p>Contenidos: articulación como elemento del discurso musical; coordinación de la articulación en el conjunto; articulación y función musical; dinámica y organización del discurso; dinámica y equilibrio colectivo; articulación, dinámica y carácter; adaptación durante el ensayo y la interpretación.</p>
+
+<h3>6.7. Fraseo y discurso musical</h3>
+<p>El fraseo y el discurso musical constituyen contenidos orientados a la comprensión y construcción de la interpretación como una unidad coherente.</p>
+<p>Contenidos: comprensión de la estructura del discurso musical; dirección y continuidad de la frase; relación entre fraseo y elementos musicales; discurso musical y función de la parte; relación entre partes y construcción compartida del discurso; tensión, reposo y dirección musical; fraseo, estilo y contexto del repertorio; escucha y revisión del discurso musical.</p>
+
+<h3>6.8. Análisis e interpretación</h3>
+<p>El análisis tiene un carácter funcional, selectivo y aplicado a la interpretación colectiva. Su finalidad es proporcionar al alumnado la información musical necesaria para comprender la obra, preparar su parte, identificar relaciones con las demás partes y fundamentar decisiones interpretativas.</p>
+<p>Contenidos: alcance del análisis; principio de suficiencia analítica; análisis de la propia parte y de su contexto colectivo; análisis previo, durante el ensayo y posterior; relación entre análisis e interpretación.</p>
+
+<h3>6.9. Estilos y repertorios</h3>
+<p>El conocimiento de los estilos y repertorios constituye un contenido aplicado a la interpretación colectiva. Su finalidad es proporcionar al alumnado referencias suficientes para reconocer las características musicales relevantes de las obras trabajadas.</p>
+<p>Contenidos: conocimiento de estilos y lenguajes musicales; diversidad de repertorios; repertorio como recurso de aprendizaje; adecuación del repertorio al nivel y al grupo; repertorio y progresión de los aprendizajes; conocimiento del contexto de las obras; fuentes y materiales de repertorio; comparación y escucha de diferentes interpretaciones; repertorio y autonomía interpretativa.</p>
+
+<h3>6.10. Comunicación musical y escénica</h3>
+<p>La comunicación musical y escénica comprende los recursos que permiten al alumnado coordinarse con otros intérpretes, transmitir decisiones musicales y desarrollar una actuación coherente con las características de la situación interpretativa.</p>
+<p>Contenidos: comunicación musical; comunicación no verbal y coordinación; comunicación específica según la materia; comunicación escénica; actuación ante incidencias.</p>
+
+<h3>6.11. Contenidos específicos por materia</h3>
+<h4>Música de Cámara</h4>
+<p>Interacción entre intérpretes; responsabilidad individual dentro del conjunto; coordinación y equilibrio; construcción compartida de la interpretación; comunicación y resolución de discrepancias; funciones musicales dentro de la formación; adaptación a diferentes formaciones; autonomía camerística; aplicación al ensayo.</p>
+
+<h4>Banda</h4>
+<p>Función individual y trabajo de sección; especificidad de viento y percusión; coordinación, dirección e integración del conjunto; equilibrio y construcción del sonido de Banda; resolución de dificultades específicas; adaptación a repertorios y configuraciones.</p>
+
+<h4>Orquesta</h4>
+<p>Función individual y trabajo de sección; relación entre secciones, familias y líneas; textura y planos sonoros; dirección y coordinación orquestal; integración entre familias; resolución de dificultades orquestales; adaptación a repertorios y configuraciones.</p>
+
+<!-- ===================== BLOQUE VII ===================== -->
+<div class="block-header" id="b7">
+  <h2>Bloque VII. Metodología</h2>
+</div>
+
+<h3>7.1. Metodología activa</h3>
+<p>La metodología activa sitúa al alumnado como participante directo en su propio proceso de aprendizaje musical. El aprendizaje se desarrolla fundamentalmente mediante la práctica instrumental, la escucha, la interacción con otros intérpretes, la resolución de dificultades y la revisión de los resultados obtenidos.</p>
+<p>Secuencia metodológica: <strong>PARTICIPAR → PRACTICAR → ESCUCHAR → ANALIZAR → DECIDIR → APLICAR → COMPROBAR → REVISAR → TRANSFERIR</strong>.</p>
+
+<h3>7.2. Aprendizaje cooperativo</h3>
+<p>El aprendizaje cooperativo constituye un principio metodológico especialmente relevante. Se entiende como una forma organizada de aprender con otras personas, basada en la interdependencia funcional, la responsabilidad individual, la comunicación, la escucha, la ayuda entre iguales y la construcción compartida de soluciones musicales.</p>
+<p>Secuencia metodológica: <strong>RESPONSABILIDAD INDIVIDUAL → INTERDEPENDENCIA → COMUNICACIÓN → COOPERACIÓN → DECISIÓN COMPARTIDA → APLICACIÓN → COMPROBACIÓN → RESPONSABILIDAD COLECTIVA</strong>.</p>
+
+<h3>7.3. Ensayo como situación de aprendizaje</h3>
+<p>El ensayo constituye una situación de aprendizaje central. No se entiende como mera repetición del repertorio, sino como una situación organizada en la que el alumnado aplica los aprendizajes adquiridos, contrasta su funcionamiento en el conjunto y modifica progresivamente su interpretación.</p>
+<p>Secuencia metodológica: <strong>PREPARAR → INTERPRETAR → DETECTAR → INTERVENIR → COMPROBAR → INTEGRAR → REVISAR → TRANSFERIR</strong>.</p>
+
+<h3>7.4. Resolución de problemas interpretativos</h3>
+<p>La resolución de problemas interpretativos se orienta a que el alumnado aprenda a identificar dificultades musicales, analizar sus causas, seleccionar procedimientos adecuados, comprobar sus resultados y transferir las soluciones a nuevas situaciones.</p>
+<p>Secuencia metodológica: <strong>DETECTAR → ANALIZAR → PROPONER → APLICAR → COMPROBAR → AJUSTAR → TRANSFERIR</strong>.</p>
+
+<h3>7.5. Aprendizaje progresivo y secuenciado</h3>
+<p>El aprendizaje se organiza de forma progresiva y secuenciada, de manera que los nuevos aprendizajes se construyan sobre los conocimientos, destrezas y procedimientos previamente adquiridos.</p>
+<p>Secuencia metodológica: <strong>CONOCER → COMPRENDER → APLICAR → CONSOLIDAR → ADAPTAR → TRANSFERIR</strong>.</p>
+
+<h3>7.6. Escucha, análisis y autorregulación</h3>
+<p>La escucha, el análisis y la autorregulación constituyen un principio metodológico orientado a que el alumnado desarrolle la capacidad de percibir, comprender y valorar su propia actuación y la del conjunto.</p>
+<p>Secuencia metodológica: <strong>ESCUCHAR → IDENTIFICAR → VALORAR → DECIDIR → AJUSTAR → COMPROBAR → TRANSFERIR</strong>.</p>
+
+<h3>7.7. Práctica individual y colectiva</h3>
+<p>La práctica individual y colectiva se desarrolla mediante una secuencia única de aprendizaje que conecta la preparación personal con la interpretación conjunta.</p>
+<p>Secuencia metodológica: <strong>PREPARAR → INTEGRAR → ESCUCHAR → AJUSTAR → REVISAR → REINTEGRAR</strong>.</p>
+
+<h3>7.8. Estrategias metodológicas específicas</h3>
+<ul>
+<li><strong>Trabajo previo individual:</strong> preparación necesaria antes de la práctica colectiva.</li>
+<li><strong>Trabajo por secciones:</strong> concentración temporal en un grupo de instrumentos o partes que comparten función.</li>
+<li><strong>Trabajo de conjunto:</strong> integración global de los aprendizajes individuales y de sección.</li>
+<li><strong>Ensayo parcial:</strong> concentración en un fragmento, movimiento o episodio concreto.</li>
+<li><strong>Ensayo general:</strong> integración completa del repertorio o del programa.</li>
+<li><strong>Audición y concierto:</strong> situaciones de interpretación pública.</li>
+<li><strong>Autoevaluación y coevaluación:</strong> procedimientos complementarios de evaluación.</li>
+</ul>
+
+<!-- ===================== BLOQUE VIII ===================== -->
+<div class="block-header" id="b8">
+  <h2>Bloque VIII. Organización y temporalización</h2>
+</div>
+
+<h3>8.1. Organización del curso</h3>
+<p>La organización del curso se establece atendiendo a la naturaleza colectiva de las materias, a la progresión de los aprendizajes y a la necesidad de articular de forma coherente el trabajo individual, el trabajo por secciones, el trabajo de conjunto, los ensayos parciales, el ensayo general y las situaciones de interpretación pública.</p>
+<p>Principios de organización: progresión, continuidad, integración, flexibilidad, coordinación, evaluación continua y autonomía progresiva.</p>
+
+<h3>8.2. Distribución trimestral</h3>
+<table>
+<tr><th>Trimestre</th><th>Finalidad predominante</th><th>Secuencia predominante</th></tr>
+<tr><td>Primer trimestre</td><td>Incorporación, diagnóstico y consolidación inicial</td><td>PREPARAR → INTEGRAR → ESCUCHAR → AJUSTAR → REVISAR</td></tr>
+<tr><td>Segundo trimestre</td><td>Integración y desarrollo</td><td>INTEGRAR → ESCUCHAR → AJUSTAR → REINTEGRAR → COMPROBAR</td></tr>
+<tr><td>Tercer trimestre</td><td>Consolidación, autonomía y transferencia</td><td>PREPARAR → CONSOLIDAR → INTERPRETAR → ADAPTAR → REVISAR → TRANSFERIR</td></tr>
+</table>
+
+<h3>8.3. Secuenciación progresiva</h3>
+<p>La secuenciación progresiva organiza los aprendizajes atendiendo al incremento gradual de la complejidad musical, la integración colectiva, la capacidad de adaptación y el grado de autonomía del alumnado.</p>
+<p>Progresión metodológica: <strong>GUIAR → ACOMPAÑAR → SUPERVISAR → AUTORREGULAR</strong>.</p>
+
+<h3>8.4. Ensayos y actividades de conjunto</h3>
+<p>Los ensayos y las actividades de conjunto constituyen el principal espacio de integración de los aprendizajes. Su organización responde a las necesidades del repertorio, al nivel del alumnado, a la evolución del proceso y a las actividades programadas por el centro.</p>
+
+<h3>8.5. Audiciones y conciertos</h3>
+<p>Las audiciones y los conciertos constituyen situaciones de interpretación pública en las que el alumnado puede transferir y demostrar los aprendizajes desarrollados. Tienen una doble dimensión: formativa y evaluativa.</p>
+
+<h3>8.6. Actividades complementarias y extraescolares</h3>
+<p>Las actividades complementarias y extraescolares se plantean como una extensión de las experiencias de aprendizaje desarrolladas en las materias. No constituyen un currículo paralelo, sino situaciones que permiten aplicar, contextualizar, ampliar y transferir los aprendizajes musicales.</p>
+
+<h3>8.7. Temporalización por cursos</h3>
+<h4>Primer curso</h4>
+<p>La temporalización corresponde exclusivamente a Banda y Orquesta. Se organiza en tres trimestres y relaciona cada ámbito de trabajo con criterios observables, desempeños y evidencias.</p>
+
+<h4>Segundo curso</h4>
+<p>Consolidación de los procedimientos adquiridos en 1.º y avance hacia una participación más estable, consciente y autónoma.</p>
+
+<h4>Tercer curso</h4>
+<p>Fase de integración avanzada y progresiva autonomía dentro de la secuencia de aprendizaje de Banda y Orquesta.</p>
+
+<h4>Cuarto curso</h4>
+<p>Fase de adaptación, integración y autonomía creciente. Se incorpora Música de Cámara.</p>
+
+<h4>Quinto curso</h4>
+<p>Fase de autonomía, adaptación avanzada y consolidación interpretativa.</p>
+
+<h4>Sexto curso</h4>
+<p>Se incrementa el grado de autonomía, responsabilidad, capacidad de adaptación y fundamentación de las decisiones interpretativas.</p>
+
+<!-- ===================== BLOQUE IX ===================== -->
+<div class="block-header" id="b9">
+  <h2>Bloque IX. Unidades didácticas y situaciones de aprendizaje</h2>
+</div>
+
+<h3>9.1. Arquitectura de las unidades</h3>
+<p>Cada unidad tendrá una estructura homogénea:</p>
+<ul>
+<li>Título</li>
+<li>Curso</li>
+<li>Materia</li>
+<li>Temporalización</li>
+<li>Justificación</li>
+<li>Objetivos</li>
+<li>Contenidos</li>
+<li>Competencias</li>
+<li>Actividades</li>
+<li>Metodología</li>
+<li>Atención a la diversidad</li>
+<li>Recursos</li>
+<li>Evidencias de aprendizaje</li>
+<li>Instrumentos de evaluación</li>
+<li>Criterios de evaluación relacionados</li>
+<li>Indicadores de logro</li>
+<li>Producto o resultado interpretativo</li>
+<li>Procedimientos de recuperación, cuando proceda</li>
+</ul>
+
+<h3>9.2. Unidades de Banda</h3>
+<h4>9.2.1. Unidades de 1.º de Banda</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Finalidad principal</th><th>Temporalización</th></tr>
+<tr><td>UD-B1.1</td><td>Incorporación a la agrupación</td><td>Conocer la dinámica de trabajo de Banda, asumir la función individual y establecer hábitos básicos.</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B1.2</td><td>Escucha y coordinación inicial</td><td>Desarrollar la escucha del conjunto y coordinar pulso, entradas, cortes y referencias básicas.</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B1.3</td><td>Afinación, sonido y equilibrio</td><td>Ajustar afinación, calidad sonora, dinámica e intensidad a las necesidades de la sección y del conjunto.</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B1.4</td><td>Trabajo de sección y conjunto</td><td>Integrar la parte individual en la sección y relacionarla progresivamente con el conjunto.</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B1.5</td><td>Interpretación y continuidad</td><td>Aplicar los aprendizajes en la interpretación colectiva, manteniendo la continuidad y siguiendo las referencias de dirección.</td><td>3.º trimestre</td></tr>
+<tr><td>UD-B1.6</td><td>Integración y actuación</td><td>Consolidar los procedimientos trabajados y aplicarlos en una interpretación completa.</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>9.2.2. Unidades de 2.º de Banda</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-B2.1</td><td>Consolidación y autonomía en la agrupación</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B2.2</td><td>Escucha global y coordinación</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B2.3</td><td>Afinación, homogeneidad y equilibrio</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B2.4</td><td>Sección, función y equilibrio del conjunto</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B2.5</td><td>Resolución de dificultades interpretativas</td><td>3.º trimestre</td></tr>
+<tr><td>UD-B2.6</td><td>Interpretación integrada y actuación</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>9.2.3. Unidades de 3.º de Banda</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-B3.1</td><td>Preparación autónoma y anticipación</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B3.2</td><td>Escucha global y coordinación entre secciones</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B3.3</td><td>Función musical, planos y equilibrio</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B3.4</td><td>Articulación, dinámica y discurso musical</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B3.5</td><td>Resolución autónoma de dificultades</td><td>3.º trimestre</td></tr>
+<tr><td>UD-B3.6</td><td>Interpretación integrada, actuación y transferencia</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>9.2.4. Unidades de 4.º de Banda</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-B4.1</td><td>Preparación autónoma, análisis funcional y anticipación</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B4.2</td><td>Coordinación avanzada entre secciones y respuesta a la dirección</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B4.3</td><td>Afinación, homogeneidad y equilibrio avanzado</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B4.4</td><td>Función musical, planos sonoros y discurso</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B4.5</td><td>Resolución autónoma y transferencia en ensayo parcial</td><td>3.º trimestre</td></tr>
+<tr><td>UD-B4.6</td><td>Interpretación integrada, actuación y transferencia</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>9.2.5. Unidades de 5.º de Banda</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-B5.1</td><td>Preparación autónoma avanzada, análisis funcional y anticipación</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B5.2</td><td>Coordinación avanzada entre secciones, familias y respuesta a la dirección</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B5.3</td><td>Afinación, homogeneidad y equilibrio avanzado</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B5.4</td><td>Función musical, planos sonoros y discurso avanzado</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B5.5</td><td>Resolución autónoma avanzada y transferencia</td><td>3.º trimestre</td></tr>
+<tr><td>UD-B5.6</td><td>Interpretación integrada, actuación y transferencia</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>9.2.6. Unidades de 6.º de Banda</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-B6.1</td><td>Preparación autónoma avanzada, análisis funcional y anticipación fundamentada</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B6.2</td><td>Coordinación avanzada entre secciones, familias y respuesta anticipada a la dirección</td><td>1.º trimestre</td></tr>
+<tr><td>UD-B6.3</td><td>Afinación, homogeneidad y equilibrio avanzado con fundamentación</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B6.4</td><td>Función musical, planos sonoros y discurso avanzado con fundamentación</td><td>2.º trimestre</td></tr>
+<tr><td>UD-B6.5</td><td>Resolución autónoma avanzada, fundamentación y transferencia</td><td>3.º trimestre</td></tr>
+<tr><td>UD-B6.6</td><td>Interpretación integrada, actuación y transferencia avanzada</td><td>3.º trimestre</td></tr>
+</table>
+
+<h3>9.3. Unidades de Orquesta (1.º a 6.º)</h3>
+<p>Las unidades de Orquesta siguen la misma estructura y progresión que las de Banda, adaptadas a las características específicas de la agrupación orquestal. La progresión específica se articula como:</p>
+<p><strong>PREPARAR → INTEGRAR → ESCUCHAR → COMPRENDER LA FUNCIÓN → ADAPTAR → DECIDIR → RESOLVER → REVISAR → TRANSFERIR</strong></p>
+
+<h4>Unidades de 1.º de Orquesta</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-O1.1</td><td>Incorporación a la agrupación orquestal</td><td>1.º trimestre</td></tr>
+<tr><td>UD-O1.2</td><td>Escucha, coordinación y referencias orquestales</td><td>1.º trimestre</td></tr>
+<tr><td>UD-O1.3</td><td>Afinación, sonido y equilibrio en la sección</td><td>2.º trimestre</td></tr>
+<tr><td>UD-O1.4</td><td>Trabajo de sección, familia y conjunto</td><td>2.º trimestre</td></tr>
+<tr><td>UD-O1.5</td><td>Función instrumental y planos sonoros</td><td>3.º trimestre</td></tr>
+<tr><td>UD-O1.6</td><td>Interpretación integrada y actuación</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>Unidades de 2.º a 6.º de Orquesta</h4>
+<p>Las unidades de 2.º a 6.º de Orquesta siguen la progresión establecida, adaptando los focos de trabajo a las características de cada nivel:</p>
+<ul>
+<li><strong>2.º:</strong> Consolidación y autonomía; escucha global y coordinación entre familias; afinación, homogeneidad y equilibrio; familia, función y equilibrio del conjunto; resolución de dificultades; interpretación integrada y actuación.</li>
+<li><strong>3.º:</strong> Preparación autónoma y anticipación; escucha global y coordinación entre familias; función musical, planos y equilibrio; articulación, dinámica y discurso; resolución autónoma; interpretación integrada, actuación y transferencia.</li>
+<li><strong>4.º:</strong> Preparación autónoma, análisis funcional y anticipación; coordinación avanzada entre familias y respuesta a la dirección; afinación, homogeneidad y equilibrio avanzado; función musical, planos sonoros y discurso; resolución autónoma y transferencia; interpretación integrada, actuación y transferencia.</li>
+<li><strong>5.º:</strong> Preparación autónoma avanzada, análisis funcional y anticipación fundamentada; coordinación avanzada entre familias y respuesta anticipada a la dirección; afinación, homogeneidad y equilibrio avanzado con fundamentación; función musical, planos sonoros y discurso avanzado con fundamentación; resolución autónoma avanzada, fundamentación y transferencia; interpretación integrada, actuación y transferencia avanzada.</li>
+<li><strong>6.º:</strong> Preparación autónoma avanzada, análisis funcional y anticipación fundamentada; coordinación avanzada entre familias y respuesta anticipada a la dirección; afinación, homogeneidad y equilibrio avanzado con fundamentación; función musical, planos sonoros y discurso avanzado con fundamentación; resolución autónoma avanzada, fundamentación y transferencia; interpretación integrada, actuación y transferencia avanzada con proyección hacia la continuidad formativa y artística.</li>
+</ul>
+
+<h3>9.4. Unidades de Música de Cámara (4.º a 6.º)</h3>
+<p>La progresión específica se articula como:</p>
+<p><strong>PREPARAR → ESCUCHAR → COORDINAR → ADAPTAR → DIALOGAR → DECIDIR → INTERPRETAR → REVISAR → TRANSFERIR</strong></p>
+
+<h4>Unidades de 4.º de Música de Cámara</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-MC4.1</td><td>Incorporación a la práctica camerística</td><td>1.º trimestre</td></tr>
+<tr><td>UD-MC4.2</td><td>Escucha horizontal y coordinación inicial</td><td>1.º trimestre</td></tr>
+<tr><td>UD-MC4.3</td><td>Afinación, sonido y equilibrio camerístico</td><td>2.º trimestre</td></tr>
+<tr><td>UD-MC4.4</td><td>Interacción y función musical</td><td>2.º trimestre</td></tr>
+<tr><td>UD-MC4.5</td><td>Construcción compartida del discurso</td><td>3.º trimestre</td></tr>
+<tr><td>UD-MC4.6</td><td>Interpretación integrada y actuación</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>Unidades de 5.º de Música de Cámara</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-MC5.1</td><td>Preparación autónoma y escucha recíproca avanzada</td><td>1.º trimestre</td></tr>
+<tr><td>UD-MC5.2</td><td>Coordinación avanzada sin dirección externa</td><td>1.º trimestre</td></tr>
+<tr><td>UD-MC5.3</td><td>Afinación, homogeneidad y equilibrio camerístico avanzado</td><td>2.º trimestre</td></tr>
+<tr><td>UD-MC5.4</td><td>Función musical, planos y discurso camerístico avanzado</td><td>2.º trimestre</td></tr>
+<tr><td>UD-MC5.5</td><td>Construcción compartida, decisión interpretativa y resolución</td><td>3.º trimestre</td></tr>
+<tr><td>UD-MC5.6</td><td>Interpretación integrada, actuación y transferencia</td><td>3.º trimestre</td></tr>
+</table>
+
+<h4>Unidades de 6.º de Música de Cámara</h4>
+<table>
+<tr><th>Unidad</th><th>Título</th><th>Temporalización</th></tr>
+<tr><td>UD-MC6.1</td><td>Preparación autónoma avanzada, análisis funcional y anticipación fundamentada</td><td>1.º trimestre</td></tr>
+<tr><td>UD-MC6.2</td><td>Coordinación avanzada sin dirección externa y respuesta anticipada</td><td>1.º trimestre</td></tr>
+<tr><td>UD-MC6.3</td><td>Afinación, homogeneidad y equilibrio camerístico avanzado con fundamentación</td><td>2.º trimestre</td></tr>
+<tr><td>UD-MC6.4</td><td>Función musical, planos sonoros y discurso avanzado con fundamentación</td><td>2.º trimestre</td></tr>
+<tr><td>UD-MC6.5</td><td>Construcción compartida avanzada, decisión interpretativa, fundamentación y transferencia</td><td>3.º trimestre</td></tr>
+<tr><td>UD-MC6.6</td><td>Interpretación integrada, actuación y transferencia avanzada</td><td>3.º trimestre</td></tr>
+</table>
+
+<!-- ===================== BLOQUE X ===================== -->
+<div class="block-header" id="b10">
+  <h2>Bloque X. Evaluación</h2>
+</div>
+
+<h3>10.1. Principios de evaluación</h3>
+<h4>10.1.1. Evaluación continua</h4>
+<p>La evaluación continua constituye el principio vertebrador del sistema de evaluación. Se entiende como un proceso integrado en la enseñanza y el aprendizaje, orientado a observar, documentar, valorar y mejorar el progreso del alumnado a lo largo de todo el curso.</p>
+<p>Características: continua, formativa y procesual.</p>
+
+<h4>10.1.2. Evaluación formativa</h4>
+<p>La evaluación formativa constituye el modo de concreción práctica de la evaluación continua. Su finalidad esencial no es clasificar ni seleccionar al alumnado, sino comprender cómo aprende, identificar qué necesita, orientar la intervención docente y favorecer la mejora progresiva del aprendizaje musical.</p>
+
+<h4>10.1.3. Evaluación criterial</h4>
+<p>La evaluación criterial toma como referencia los criterios de evaluación establecidos, los objetivos de las materias y los desempeños observables que de ellos se derivan. No mide cuánto destaca un alumno respecto al grupo, sino qué ha aprendido, cómo lo demuestra y en qué grado.</p>
+
+<h4>10.1.4. Evaluación del proceso y del resultado</h4>
+<p>La evaluación atiende a dos dimensiones complementarias: el proceso (cómo el alumnado prepara, ensaya, escucha, ajusta, resuelve, revisa y transfiere) y el resultado (qué se consigue en la interpretación).</p>
+
+<h4>10.1.5. Evaluación individual dentro de la práctica colectiva</h4>
+<p>La evaluación individual dentro de la práctica colectiva permite valorar el aprendizaje de cada alumno o alumna en el marco de una actividad musical compartida, garantizando que la valoración no quede diluida en el resultado global de la agrupación.</p>
+
+<h3>10.2. Procedimientos e instrumentos de evaluación</h3>
+<h4>10.2.1. Observación sistemática</h4>
+<p>La observación sistemática constituye el procedimiento fundamental para la obtención de evidencias. Se caracteriza por ser intencionada, organizada, orientada por criterios y documentada.</p>
+
+<h4>10.2.2. Registro de aula</h4>
+<p>El registro de aula constituye el instrumento mediante el cual se documenta de forma organizada y trazable la información obtenida durante el proceso de enseñanza-aprendizaje.</p>
+
+<h4>10.2.3. Rúbricas</h4>
+<p>La rúbrica constituye un instrumento de evaluación que permite valorar desempeños complejos mediante criterios previamente establecidos y descripciones graduadas del nivel de logro.</p>
+
+<h4>10.2.4. Listas de cotejo</h4>
+<p>La lista de cotejo constituye un instrumento que permite constatar la presencia o ausencia de desempeños concretos, previamente definidos, durante una actividad de aprendizaje musical.</p>
+
+<h4>10.2.5. Audiciones</h4>
+<p>La audición constituye una situación de interpretación pública de carácter formativo que permite al alumnado aplicar y demostrar los aprendizajes desarrollados.</p>
+
+<h4>10.2.6. Interpretaciones colectivas</h4>
+<p>Las interpretaciones colectivas constituyen situaciones de evaluación integradas en la práctica musical de conjunto, en las que el alumnado interpreta repertorio en el marco de una agrupación.</p>
+
+<h4>10.2.7. Autoevaluación</h4>
+<p>La autoevaluación constituye un procedimiento mediante el cual el propio alumnado valora su desempeño, su proceso de aprendizaje y su contribución al resultado colectivo.</p>
+
+<h4>10.2.8. Coevaluación</h4>
+<p>La coevaluación constituye un procedimiento mediante el cual el alumnado valora el desempeño de sus compañeros utilizando criterios previamente establecidos y evidencias concretas.</p>
+
+<h4>10.2.9. Evidencias audiovisuales</h4>
+<p>Las evidencias audiovisuales constituyen un procedimiento complementario de obtención y documentación de evidencias mediante el cual se registran interpretaciones, ensayos, actuaciones o fragmentos del repertorio.</p>
+
+<h3>10.3. Criterios de calificación</h3>
+<h4>10.3.1. Principios generales</h4>
+<p>La calificación se determina a partir de las evidencias obtenidas durante el proceso de evaluación, conforme a los criterios establecidos. Se ajusta a la escala numérica de 1 a 10 sin decimales, considerándose positivas las calificaciones iguales o superiores a cinco.</p>
+
+<h4>10.3.2. Relación entre criterios y evidencias</h4>
+<p>La relación entre criterios y evidencias permite transformar la información obtenida durante el proceso de evaluación en elementos utilizables para la determinación de la calificación.</p>
+
+<h4>10.3.3. Procedimiento de determinación de la calificación</h4>
+<p>El procedimiento se articula mediante las siguientes fases: recogida de evidencias, relación con los criterios, determinación del nivel de logro, integración de la información, aplicación de la ponderación (cuando proceda), determinación de la calificación, comunicación y retroalimentación.</p>
+
+<h4>10.3.4. Casos específicos de interpretación colectiva</h4>
+<p>Se contemplan los siguientes casos específicos: alumnado con diferentes niveles dentro de una misma agrupación; alumnado con partes de diferente dificultad técnica; alumnado con partes de diferente visibilidad o protagonismo sonoro; alumnado con diferentes instrumentos; alumnado con diferentes ritmos de aprendizaje; alumnado con diferentes experiencias previas; alumnado con incorporación tardía; alumnado con cambios de agrupación; alumnado con participación en varias agrupaciones; alumnado con adaptaciones o medidas de atención a la diversidad; alumnado con dificultades sobrevenidas; alumnado con evaluación negativa; alumnado con participación en actividades complementarias; alumnado con desempeño desigual en diferentes criterios.</p>
+
+<h4>10.3.5. Recuperación de aprendizajes no alcanzados</h4>
+<p>La recuperación se entiende como un proceso formativo, contextualizado y orientado a la mejora, que se integra en la evaluación continua y que proporciona al alumnado nuevas oportunidades para demostrar su aprendizaje.</p>
+<p>Los pesos internos que no estén definitivamente aprobados quedarán expresamente en HOLD y no se presentarán como norma.</p>
+
+<!-- ===================== BLOQUE XI ===================== -->
+<div class="block-header" id="b11">
+  <h2>Bloque XI. Atención a la diversidad e inclusión</h2>
+</div>
+
+<h3>11.1. Principios de atención a la diversidad</h3>
+<p>La atención a la diversidad constituye un principio pedagógico transversal. Se entiende como el conjunto de principios, medidas y actuaciones que garantizan la participación efectiva, el acceso al aprendizaje y el progreso de todo el alumnado.</p>
+<p>Principios: inclusión, equidad, normalización, individualización, flexibilidad, participación, accesibilidad, no discriminación, coordinación y trazabilidad.</p>
+
+<h3>11.2. Diversidad de capacidades y ritmos de aprendizaje</h3>
+<p>La diversidad de capacidades y ritmos de aprendizaje constituye una característica estructural de las agrupaciones instrumentales. Se atiende mediante graduación de la dificultad, flexibilidad en la planificación, diversificación de estrategias, adaptación de tiempos, atención individualizada dentro del conjunto, seguimiento continuo y revisión de las medidas.</p>
+
+<h3>11.3. Diferencias instrumentales y técnicas</h3>
+<p>Las agrupaciones instrumentales integran especialidades con características técnicas, acústicas y funcionales diferentes. Se atiende mediante conocimiento de las características instrumentales, consideración de las particularidades técnicas, adaptación de expectativas, atención a las exigencias específicas y valoración de la contribución funcional.</p>
+
+<h3>11.4. Adaptaciones metodológicas</h3>
+<p>Las adaptaciones metodológicas constituyen ajustes en los procedimientos de enseñanza, las estrategias de trabajo, los agrupamientos, los recursos y las formas de organización. Se caracterizan por ser flexibles, progresivas, contextualizadas, integradas, temporales, diversificadas, trazables y no discriminatorias.</p>
+
+<h3>11.5. Medidas ordinarias</h3>
+<p>Las medidas ordinarias constituyen el conjunto de actuaciones de carácter pedagógico y organizativo que se adoptan en el marco ordinario de la actividad educativa. Se caracterizan por su carácter preventivo, integrado y normalizado.</p>
+
+<h3>11.6. Coordinación con el equipo docente</h3>
+<p>La coordinación con el equipo docente constituye un elemento esencial para garantizar la coherencia y la eficacia de las medidas de atención a la diversidad. Se desarrolla mediante los procedimientos y cauces establecidos por el centro.</p>
+
+<h3>11.7. Seguimiento individualizado</h3>
+<p>El seguimiento individualizado constituye el conjunto de actuaciones mediante las cuales se observa, documenta y valora la evolución del alumnado a lo largo del proceso de aprendizaje.</p>
+
+<h3>11.8. Participación inclusiva en el conjunto</h3>
+<p>La participación inclusiva en el conjunto constituye el principio que garantiza que todo el alumnado pueda participar de manera efectiva y significativa en las actividades de interpretación colectiva. No consiste en que todos los integrantes hagan lo mismo, sino en que cada uno pueda contribuir desde su función y sus posibilidades.</p>
+
+<!-- ===================== BLOQUE XII ===================== -->
+<div class="block-header" id="b12">
+  <h2>Bloque XII. Actividades complementarias y artísticas</h2>
+</div>
+
+<h3>12.1. Actividades complementarias</h3>
+<p>Las actividades complementarias constituyen el conjunto de situaciones de aprendizaje y experiencias musicales que, formando parte de la planificación educativa del centro, amplían, contextualizan y enriquecen el desarrollo ordinario de las materias.</p>
+
+<h4>12.1.1. Audiciones</h4>
+<p>La audición constituye una situación de interpretación pública de carácter formativo. Se caracteriza por su finalidad formativa, su contextualización, su carácter integrador, su progresividad, su flexibilidad, su inclusión, su trazabilidad y su carácter complementario.</p>
+
+<h4>12.1.2. Conciertos</h4>
+<p>El concierto constituye una situación de interpretación pública estructurada, en la que el alumnado interpreta un programa definido ante un público. Se diferencia de la audición en su mayor estructuración, extensión y formalización.</p>
+
+<h4>12.1.3. Encuentros musicales</h4>
+<p>Los encuentros musicales constituyen actividades complementarias de intercambio y convivencia musical en las que el alumnado participa junto con otras agrupaciones, centros o instituciones.</p>
+
+<h4>12.1.4. Actividades interdepartamentales</h4>
+<p>Las actividades interdepartamentales constituyen actividades complementarias de colaboración entre diferentes departamentos o materias del centro.</p>
+
+<h4>12.1.5. Proyectos artísticos del centro</h4>
+<p>Los proyectos artísticos del centro constituyen actividades complementarias de mayor alcance en las que el alumnado participa en proyectos musicales o artísticos que integran diferentes ámbitos, materias o disciplinas.</p>
+
+<h3>12.2. Actividades extraescolares</h3>
+<p>Las actividades extraescolares constituyen el conjunto de situaciones de aprendizaje que, formando parte de la planificación educativa del centro, se desarrollan fuera del recinto escolar o en horario distinto al lectivo ordinario.</p>
+
+<h4>12.2.1. Criterios de organización</h4>
+<p>La organización de las actividades extraescolares se ajusta a los criterios establecidos por el centro, conforme a su normativa de organización y funcionamiento, a la planificación general anual y a las disposiciones normativas aplicables.</p>
+
+<h4>12.2.2. Participación del alumnado</h4>
+<p>La participación del alumnado en las actividades extraescolares tiene carácter voluntario conforme a la planificación del centro y a la normativa aplicable, y no sustituye al desarrollo ordinario de las materias.</p>
+
+<h4>12.2.3. Coordinación y autorización</h4>
+<p>La coordinación y la autorización constituyen elementos esenciales para garantizar el correcto desarrollo de las actividades extraescolares, conforme a los procedimientos establecidos por el centro.</p>
+
+<h4>12.2.4. Valor educativo de las actividades</h4>
+<p>El valor educativo de las actividades extraescolares depende de su integración curricular, de su pertinencia pedagógica, de la implicación del alumnado y de su contribución efectiva al aprendizaje.</p>
+
+<!-- ===================== BLOQUE XIII ===================== -->
+<div class="block-header" id="b13">
+  <h2>Bloque XIII. Recursos</h2>
+</div>
+
+<h3>13.1. Recursos didácticos</h3>
+<p>Los recursos didácticos constituyen el conjunto de medios, materiales, instrumentos, espacios y agentes que contribuyen al desarrollo de los procesos de enseñanza y aprendizaje. Su selección, organización y utilización está subordinada a la finalidad educativa.</p>
+
+<h3>13.2. Instrumentos</h3>
+<p>Los instrumentos musicales constituyen un recurso esencial. Su disponibilidad, estado de conservación y condiciones de uso condicionan directamente el desarrollo de las actividades de interpretación.</p>
+
+<h3>13.3. Partituras y repertorio</h3>
+<p>Las partituras y el repertorio constituyen un recurso fundamental. Su disponibilidad, adecuación y organización condicionan el desarrollo de las actividades de interpretación y el trabajo del alumnado.</p>
+
+<h3>13.4. Material bibliográfico</h3>
+<p>El material bibliográfico constituye un recurso complementario que permite ampliar conocimientos, fundamentar decisiones interpretativas y profundizar en el conocimiento del repertorio, los estilos y las prácticas interpretativas.</p>
+
+<h3>13.5. Recursos audiovisuales</h3>
+<p>Los recursos audiovisuales constituyen un recurso complementario que permite facilitar la escucha, el análisis diferido, la autoevaluación, la coevaluación y la documentación del proceso de aprendizaje.</p>
+
+<h3>13.6. Recursos tecnológicos</h3>
+<p>Los recursos tecnológicos constituyen un recurso complementario que permite facilitar la preparación individual, el trabajo colectivo, la escucha activa, el análisis musical, la práctica autónoma, la documentación del proceso y la reflexión sobre la propia interpretación.</p>
+
+<h3>13.7. Espacios</h3>
+<p>Los espacios constituyen un recurso esencial. Sus características, disponibilidad y condiciones condicionan directamente el desarrollo de las actividades de interpretación.</p>
+
+<h3>13.8. Recursos humanos</h3>
+<p>Los recursos humanos constituyen un recurso esencial. Su disponibilidad, competencia y coordinación condicionan el desarrollo de las actividades de interpretación y el trabajo del alumnado.</p>
+
+<!-- ===================== BLOQUE XIV ===================== -->
+<div class="block-header" id="b14">
+  <h2>Bloque XIV. Coordinación</h2>
+</div>
+
+<h3>14.1. Coordinación docente</h3>
+<p>La coordinación docente constituye un elemento esencial para garantizar la coherencia, la continuidad y la eficacia del proceso de enseñanza-aprendizaje. No se limita a la transmisión de información entre profesionales, sino que constituye un proceso continuo y organizado.</p>
+
+<h3>14.2. Coordinación dentro del departamento</h3>
+<p>La coordinación dentro del departamento constituye el nivel básico y fundamental de la coordinación docente. El departamento didáctico correspondiente es el órgano de referencia para la planificación, el desarrollo, el seguimiento y la evaluación de las materias.</p>
+
+<h3>14.3. Coordinación entre materias</h3>
+<p>La coordinación entre materias garantiza la coherencia y la continuidad del proceso de enseñanza-aprendizaje. Las materias de Música de Cámara, Banda y Orquesta comparten una finalidad formativa común y presentan elementos comunes que requieren coordinación específica.</p>
+
+<h3>14.4. Coordinación con tutorías</h3>
+<p>La coordinación con tutorías garantiza el seguimiento individualizado del alumnado y la coherencia de la intervención educativa. La tutoría es el cauce de referencia para la comunicación entre el profesorado, el alumnado y, cuando proceda, las familias.</p>
+
+<h3>14.5. Coordinación con otros departamentos</h3>
+<p>La coordinación con otros departamentos garantiza la coherencia y la continuidad del proceso de enseñanza-aprendizaje y favorece la transferencia de aprendizajes entre diferentes materias y ámbitos.</p>
+
+<h3>14.6. Coordinación con el equipo directivo</h3>
+<p>La coordinación con el equipo directivo garantiza la coherencia y la continuidad del proceso de enseñanza-aprendizaje y facilita la organización de las materias conforme a la planificación general del centro.</p>
+
+<h3>14.7. Coordinación en actividades artísticas</h3>
+<p>La coordinación en actividades artísticas garantiza la coherencia y la continuidad del proceso de enseñanza-aprendizaje y facilita la organización de las actividades artísticas del centro en las que participan las agrupaciones.</p>
+
+<!-- ===================== BLOQUE XV ===================== -->
+<div class="block-header" id="b15">
+  <h2>Bloque XV. Seguimiento y evaluación de la programación</h2>
+</div>
+
+<h3>15.1. Evaluación de la propia programación</h3>
+<p>La evaluación de la propia programación constituye el proceso mediante el cual se analiza, valora y revisa la adecuación de esta Programación Didáctica a las características del alumnado, a las condiciones reales del centro y a las exigencias de las materias. Su finalidad es la mejora continua del proceso de enseñanza-aprendizaje y de la propia práctica docente.</p>
+
+<h3>15.2. Indicadores de seguimiento</h3>
+<p>Los indicadores de seguimiento constituyen el conjunto de referentes que permiten valorar la adecuación de la programación a las condiciones reales del curso y detectar las necesidades de ajuste o mejora. Se concretan por ámbitos: objetivos, contenidos, competencias, metodología, actividades, temporalización, recursos, evaluación y resultados.</p>
+
+<h3>15.3. Grado de cumplimiento</h3>
+<p>El grado de cumplimiento constituye el análisis del nivel de ejecución efectiva de lo planificado. No se limita a la constatación cuantitativa, sino que implica una valoración cualitativa de la adecuación de las decisiones adoptadas a las condiciones reales del curso.</p>
+
+<h3>15.4. Adecuación de la temporalización</h3>
+<p>La adecuación de la temporalización constituye el análisis de la correspondencia entre la planificación temporal prevista y el desarrollo efectivo del curso. Implica una valoración cualitativa de la adecuación del tiempo a las necesidades reales del proceso de enseñanza-aprendizaje.</p>
+
+<h3>15.5. Adecuación de las actividades</h3>
+<p>La adecuación de las actividades constituye el análisis de la correspondencia entre las actividades planificadas y las necesidades reales del proceso de enseñanza-aprendizaje. Implica una valoración cualitativa de su contribución efectiva al aprendizaje del alumnado.</p>
+
+<h3>15.6. Adecuación de los instrumentos de evaluación</h3>
+<p>La adecuación de los instrumentos de evaluación constituye el análisis de la correspondencia entre los instrumentos utilizados y las necesidades reales del proceso de evaluación. Implica una valoración cualitativa de su contribución efectiva a la evaluación del aprendizaje.</p>
+
+<h3>15.7. Resultados obtenidos</h3>
+<p>El análisis de los resultados obtenidos constituye el proceso mediante el cual se valora la correspondencia entre los resultados alcanzados por el alumnado y los objetivos y criterios establecidos. Implica una valoración cualitativa del grado de desarrollo de los aprendizajes previstos.</p>
+
+<h3>15.8. Dificultades detectadas</h3>
+<p>El análisis de las dificultades detectadas constituye el proceso mediante el cual se identifican, analizan y valoran las dificultades que han afectado al desarrollo de la programación. Implica una valoración cualitativa de su naturaleza, su origen y sus consecuencias.</p>
+
+<h3>15.9. Propuestas de mejora</h3>
+<p>Las propuestas de mejora constituyen el conjunto de actuaciones mediante las cuales se formulan, seleccionan y planifican las modificaciones que deberán incorporarse a la programación posterior. Se fundamentan en el análisis de los indicadores, resultados y dificultades detectadas.</p>
+
+<!-- ===================== BLOQUE XVI ===================== -->
+<div class="block-header" id="b16">
+  <h2>Bloque XVI. Garantías documentales</h2>
+</div>
+
+<h3>16.1. Control de fuentes y trazabilidad</h3>
+<p>El control de fuentes y la trazabilidad constituyen el conjunto de procedimientos mediante los cuales se garantiza la identificación, la procedencia, la vigencia, la naturaleza y la verificabilidad de los contenidos incorporados a esta Programación Didáctica.</p>
+
+<h3>16.2. Normativa oficial</h3>
+<p>La normativa oficial constituye el marco jurídico y curricular de referencia. Su identificación, comprobación y aplicación se realiza conforme a los criterios de vigencia, ámbito de aplicación, jerarquía normativa, competencia normativa y trazabilidad.</p>
+
+<h3>16.3. Textos oficiales</h3>
+<p>Los textos oficiales constituyen el conjunto de contenidos reproducidos o desarrollados a partir de una fuente oficial identificable, manteniendo su naturaleza y procedencia. Proporcionan los referentes curriculares y de evaluación.</p>
+
+<h3>16.4. Desarrollo curricular propio</h3>
+<p>El desarrollo curricular propio constituye el conjunto de decisiones y concreciones pedagógicas elaboradas específicamente para esta Programación Didáctica a partir del marco normativo y curricular correspondiente.</p>
+
+<h3>16.5. Evidencias</h3>
+<p>Las evidencias constituyen el conjunto de documentos, registros, productos, instrumentos o elementos verificables que permiten acreditar, fundamentar o realizar el seguimiento de una determinada afirmación, decisión o actuación.</p>
+
+<h3>16.6. Documentos de centro</h3>
+<p>Los documentos de centro constituyen el conjunto de documentos institucionales que concretan aspectos organizativos y pedagógicos dentro del ámbito de sus competencias y que resultan aplicables a esta Programación Didáctica.</p>
+
+<h3>16.7. Elementos pendientes de verificación</h3>
+<p>Los elementos pendientes de verificación constituyen el conjunto de contenidos cuya incorporación definitiva queda condicionada a la comprobación de su procedencia, vigencia, aprobación o adecuación.</p>
+
+<h3>16.8. Control de versiones</h3>
+<p>El control de versiones constituye el conjunto de procedimientos mediante los cuales se documenta la evolución de esta Programación Didáctica, se identifican las modificaciones realizadas y se garantiza la trazabilidad de los cambios introducidos.</p>
+
+<!-- ===================== BLOQUE XVII ===================== -->
+<div class="block-header" id="b17">
+  <h2>Bloque XVII. Anexos</h2>
+</div>
+
+<h3>17.1. Matriz normativa</h3>
+<p>La matriz normativa constituye el instrumento que relaciona las disposiciones normativas aplicables con los apartados de la programación en los que se concretan.</p>
+<table>
+<tr><th>Disposición</th><th>Rango</th><th>Fecha</th><th>Ámbito</th><th>Estado</th></tr>
+<tr><td>Constitución Española</td><td>Norma fundamental</td><td>27/12/1978</td><td>Estatal</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Ley Orgánica 2/2006, de 3 de mayo</td><td>Ley Orgánica</td><td>03/05/2006</td><td>Estatal</td><td><span class="tag tag-norm">NORMA VIGENTE</span></td></tr>
+<tr><td>Real Decreto 1577/2006, de 22 de diciembre</td><td>Real Decreto</td><td>22/12/2006</td><td>Estatal</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (mod. por RD 628/2022 — HECHO VERIFICADO)</td></tr>
+<tr><td>Decreto 111/2007, de 22 de mayo</td><td>Decreto</td><td>22/05/2007</td><td>Autonómico</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (DATO A CONFIRMAR — proyecto de modificación en tramitación desde 2023, aprobación definitiva no confirmada)</td></tr>
+<tr><td>Decreto 228/2014, de 14 de octubre</td><td>Decreto</td><td>14/10/2014</td><td>Autonómico</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (HECHO VERIFICADO)</td></tr>
+<tr><td>Ley 11/2014, de 9 de diciembre</td><td>Ley</td><td>09/12/2014</td><td>Autonómico</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (HECHO VERIFICADO)</td></tr>
+<tr><td>Resolución de 15 de junio de 2026</td><td>Resolución</td><td>15/06/2026</td><td>Autonómico</td><td><span class="tag tag-norm">NORMA VIGENTE</span> (HECHO VERIFICADO — DOE n.º 116, de 18/06/2026)</td></tr>
+</table>
+
+<h3>17.2. Matriz objetivos–contenidos–criterios</h3>
+<p>La matriz objetivos–contenidos–criterios constituye el instrumento que relaciona los objetivos generales y específicos con los contenidos establecidos y con los criterios de evaluación CO-01 a CO-12.</p>
+<table>
+<tr><th>Criterio</th><th>Contenidos generales relacionados</th><th>Contenidos específicos relacionados</th></tr>
+<tr><td>CO-01. Preparación</td><td>Técnica instrumental aplicada al conjunto</td><td>Preparación individual; trabajo de sección</td></tr>
+<tr><td>CO-02. Ritmo y coordinación</td><td>Ritmo y precisión colectiva</td><td>Coordinación; entradas y cortes</td></tr>
+<tr><td>CO-03. Escucha y ajuste</td><td>Escucha y equilibrio sonoro</td><td>Escucha recíproca; escucha global</td></tr>
+<tr><td>CO-04. Afinación y sonido</td><td>Afinación; sonido y calidad tímbrica</td><td>Afinación; homogeneidad sonora</td></tr>
+<tr><td>CO-05. Articulación y dinámica</td><td>Articulación y dinámica</td><td>Articulación común; dinámica colectiva</td></tr>
+<tr><td>CO-06. Balance y función</td><td>Escucha y equilibrio sonoro; análisis e interpretación</td><td>Función musical; planos sonoros</td></tr>
+<tr><td>CO-07. Interpretación y discurso</td><td>Fraseo y discurso musical; estilos y repertorios</td><td>Construcción del discurso; estilo</td></tr>
+<tr><td>CO-08. Adaptación</td><td>Escucha y equilibrio sonoro; articulación y dinámica</td><td>Adaptación a cambios; respuesta a dirección</td></tr>
+<tr><td>CO-09. Continuidad</td><td>Ritmo y precisión colectiva</td><td>Continuidad ante incidencias</td></tr>
+<tr><td>CO-10. Resolución de problemas</td><td>Resolución de problemas interpretativos</td><td>Identificación y resolución de dificultades</td></tr>
+<tr><td>CO-11. Autonomía y responsabilidad</td><td>Trabajo previo individual; trabajo de conjunto</td><td>Responsabilidad individual; preparación autónoma</td></tr>
+<tr><td>CO-12. Revisión y transferencia</td><td>Aprendizaje progresivo; escucha y autorregulación</td><td>Revisión; transferencia</td></tr>
+</table>
+
+<h3>17.3. Matriz competencias–actividades–evaluación</h3>
+<p>La matriz competencias–actividades–evaluación constituye el instrumento que relaciona las competencias con las actividades de aprendizaje y con los procedimientos e instrumentos de evaluación.</p>
+<table>
+<tr><th>Competencia</th><th>Actividades prioritarias</th><th>Criterios</th><th>Evidencias</th><th>Instrumentos</th></tr>
+<tr><td>CM-1. Ejecución instrumental</td><td>Preparación individual, ensayo, interpretación</td><td>CO-01, CO-04, CO-05</td><td>Parte preparada, ejecución</td><td>Lista de cotejo, escala, rúbrica</td></tr>
+<tr><td>CM-2. Ritmo y coordinación</td><td>Ensayo de sección, ensayo de conjunto</td><td>CO-02</td><td>Ejecución coordinada</td><td>Lista de cotejo, escala</td></tr>
+<tr><td>CM-3. Escucha y ajuste</td><td>Ensayo, escucha comparada</td><td>CO-03, CO-04</td><td>Ajustes de afinación, dinámica</td><td>Escala, registro</td></tr>
+<tr><td>CM-4. Interpretación musical</td><td>Ensayo, interpretación, análisis</td><td>CO-05, CO-07</td><td>Interpretación coherente</td><td>Rúbrica, escala</td></tr>
+<tr><td>CM-5. Interacción musical</td><td>Ensayo, interpretación</td><td>CO-02, CO-03, CO-06, CO-08</td><td>Coordinación, adaptación</td><td>Rúbrica, escala</td></tr>
+<tr><td>CM-6. Análisis y resolución</td><td>Ensayo parcial, resolución</td><td>CO-10</td><td>Identificación, aplicación</td><td>Registro, ficha</td></tr>
+<tr><td>CM-7. Transferencia musical</td><td>Actividades de transferencia</td><td>CO-12</td><td>Aplicación a nuevas situaciones</td><td>Ficha, registro</td></tr>
+</table>
+
+<h3>17.4. Rúbricas</h3>
+<p>Las rúbricas constituyen instrumentos de evaluación que permiten valorar desempeños complejos mediante criterios previamente establecidos y descripciones graduadas del nivel de logro.</p>
+<p><strong>Niveles de logro:</strong></p>
+<table>
+<tr><th>Nivel</th><th>Denominación</th><th>Descripción general</th></tr>
+<tr><td>1</td><td>Inicial</td><td>Realiza el desempeño con apoyo frecuente; necesita indicaciones directas.</td></tr>
+<tr><td>2</td><td>En desarrollo</td><td>Aplica procedimientos conocidos con apoyo puntual; identifica dificultades habituales.</td></tr>
+<tr><td>3</td><td>Adecuado</td><td>Actúa con autonomía en situaciones habituales; escucha, ajusta, resuelve, comprueba y fundamenta.</td></tr>
+<tr><td>4</td><td>Consolidado</td><td>Anticipa necesidades, adapta su actuación con flexibilidad, resuelve situaciones nuevas, fundamenta y transfiere.</td></tr>
+</table>
+
+<h3>17.5. Instrumentos de observación</h3>
+<p>Los instrumentos de observación constituyen el conjunto de herramientas estructuradas que permiten registrar de forma sistemática, ordenada y trazable la información obtenida durante el proceso de enseñanza-aprendizaje.</p>
+<p>Tipos: tabla de evaluación por tribunal, rúbrica de evaluación por tribunal, tabla de calificación individual, registro de ensayo, ficha de seguimiento individual, lista de cotejo, escala descriptiva, registro de incidencias, ficha de revisión, ficha de autoevaluación, ficha de coevaluación.</p>
+
+<h4>Tabla de evaluación por tribunal — Música de Cámara</h4>
+<table>
+<tr><th>Criterio</th><th>No competente</th><th>Comp. básica</th><th>Comp. media</th><th>Comp. avanzada</th></tr>
+<tr><td>Control de dinámicas</td><td>☐ ×1</td><td>☐ ×2</td><td>☐ ×3</td><td>☐ ×4</td></tr>
+<tr><td>Precisión rítmica y de tempo</td><td>☐ ×1</td><td>☐ ×2</td><td>☐ ×3</td><td>☐ ×4</td></tr>
+<tr><td>Articulación</td><td>☐ ×1</td><td>☐ ×2</td><td>☐ ×3</td><td>☐ ×4</td></tr>
+<tr><td>Fraseo y estilo</td><td>☐ ×1</td><td>☐ ×2</td><td>☐ ×3</td><td>☐ ×4</td></tr>
+<tr><td>Coordinación y escucha</td><td>☐ ×1</td><td>☐ ×2</td><td>☐ ×3</td><td>☐ ×4</td></tr>
+<tr><td>Afinación / Planos sonoros</td><td>☐ ×1</td><td>☐ ×2</td><td>☐ ×3</td><td>☐ ×4</td></tr>
+</table>
+<p><strong>Nota final = (Total suma × 10) / 24</strong></p>
+
+<h3>17.6. Listas de cotejo</h3>
+<p>Las listas de cotejo constituyen instrumentos que permiten constatar la presencia o ausencia de desempeños concretos, previamente definidos, durante una actividad de aprendizaje musical.</p>
+<table>
+<tr><th>Aspecto a verificar</th><th>Sí</th><th>No</th><th>En proceso</th><th>Observaciones</th></tr>
+<tr><td>Prepara la parte asignada antes del ensayo</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Identifica las dificultades principales</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Mantiene el pulso durante la interpretación</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Realiza entradas coordinadas con el conjunto</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Escucha las demás partes del conjunto</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Ajusta la afinación al conjunto</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Adapta la intensidad a la función musical</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Identifica su función dentro del conjunto</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Mantiene la continuidad ante incidencias</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+<tr><td>Revisa su desempeño tras la actividad</td><td>☐</td><td>☐</td><td>☐</td><td></td></tr>
+</table>
+
+<h3>17.7. Modelos de registro</h3>
+<p>Los modelos de registro constituyen el conjunto de plantillas, fichas y documentos estructurados que permiten documentar de forma organizada, sistemática y trazable la información obtenida durante el proceso de enseñanza-aprendizaje.</p>
+
+<h4>Registro de ensayo simplificado</h4>
+<table>
+<tr><th>Fecha</th><th>Obra/pasaje</th><th>Dificultad detectada</th><th>Ajuste realizado</th><th>Resultado</th><th>Aspecto pendiente</th></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<h4>Ficha de seguimiento individual</h4>
+<table>
+<tr><th>Criterio</th><th>Nivel inicial</th><th>Nivel actual</th><th>Evolución</th><th>Observaciones</th></tr>
+<tr><td>CO-01</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-02</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-03</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-04</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-05</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-06</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-07</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-08</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-09</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-10</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-11</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO-12</td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<h4>Ficha de autoevaluación</h4>
+<table>
+<tr><th>¿Qué he preparado?</th><th>¿Qué he detectado?</th><th>¿Qué he ajustado?</th><th>¿Qué he conseguido?</th><th>¿Qué debo mejorar?</th></tr>
+<tr><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<h3>17.8. Repertorio orientativo</h3>
+<p>El repertorio orientativo constituye el conjunto de propuestas de obras, compositores y materiales musicales que pueden ser utilizados como referencia para la selección y secuenciación del repertorio.</p>
+
+<h4>Repertorio orientativo de Música de Cámara</h4>
+<table>
+<tr><th>Curso</th><th>Orientación repertorial</th><th>Prioridades de trabajo</th></tr>
+<tr><td>4.º</td><td>Repertorio de iniciación y consolidación camerística; formaciones reducidas; obras que permitan diálogo e interacción.</td><td>Escucha directa, entradas y cortes, afinación, coordinación, equilibrio, articulación común, construcción compartida.</td></tr>
+<tr><td>5.º</td><td>Repertorio de dificultad progresiva; mayor independencia entre partes; diversidad de formaciones, estilos y lenguajes.</td><td>Autonomía, decisiones interpretativas compartidas, fraseo, articulación, dinámica, equilibrio, estructura.</td></tr>
+<tr><td>6.º</td><td>Repertorio de mayor exigencia técnica, musical e interpretativa; seleccionado según la formación real.</td><td>Autonomía interpretativa, fundamentación estilística, construcción del discurso, comunicación artística.</td></tr>
+</table>
+
+<h4>Repertorio orientativo de Banda</h4>
+<table>
+<tr><th>Curso</th><th>Orientación repertorial</th><th>Prioridades de trabajo</th></tr>
+<tr><td>1.º</td><td>Repertorio elemental y progresivo; obras breves y adaptaciones adecuadas al nivel y a la plantilla.</td><td>Adaptación al conjunto, pulsación, entradas, cortes, lectura colectiva, articulación básica, dinámica.</td></tr>
+<tr><td>2.º</td><td>Repertorio de dificultad elemental-media; progresiva independencia de las partes; variedad de estilos.</td><td>Coordinación de sección, afinación, articulación, equilibrio, homogeneidad, función de la propia parte.</td></tr>
+<tr><td>3.º</td><td>Repertorio de dificultad media; mayor diversidad estilística y complejidad progresiva.</td><td>Coordinación entre secciones, autonomía, afinación, dinámica, fraseo, equilibrio, resolución de dificultades.</td></tr>
+<tr><td>4.º</td><td>Repertorio de dificultad media-media/alta; mayor variedad estilística y exigencia técnica e interpretativa.</td><td>Función dentro de la sección, relación sección-conjunto, equilibrio, dirección, articulación, fraseo.</td></tr>
+<tr><td>5.º</td><td>Repertorio de dificultad media-alta/alta; mayor independencia de partes y exigencia colectiva.</td><td>Homogeneidad, equilibrio, precisión rítmica, adaptación a la dirección, resolución de problemas.</td></tr>
+<tr><td>6.º</td><td>Repertorio de dificultad alta y diversidad estilística; seleccionado según las posibilidades reales.</td><td>Autonomía, precisión colectiva, equilibrio avanzado, interpretación estilística, adaptación.</td></tr>
+</table>
+
+<h4>Repertorio orientativo de Orquesta</h4>
+<table>
+<tr><th>Curso</th><th>Orientación repertorial</th><th>Prioridades de trabajo</th></tr>
+<tr><td>1.º</td><td>Repertorio elemental y progresivo; obras breves y adaptaciones adecuadas a la plantilla y al nivel.</td><td>Adaptación al conjunto, pulsación, entradas, cortes, escucha básica, función de la parte, dirección.</td></tr>
+<tr><td>2.º</td><td>Repertorio de dificultad elemental-media; progresiva independencia entre líneas y diversidad estilística.</td><td>Coordinación de sección, escucha de otras líneas, afinación, equilibrio, funciones básicas.</td></tr>
+<tr><td>3.º</td><td>Repertorio de dificultad media; mayor diversidad de estructuras y lenguajes.</td><td>Relación entre familias, planos sonoros, función instrumental, coordinación, adaptación al conjunto.</td></tr>
+<tr><td>4.º</td><td>Repertorio de dificultad media-media/alta; aumento de la complejidad de textura, función y discurso.</td><td>Función dentro de sección y familia, equilibrio, textura, planos sonoros, dirección, autonomía.</td></tr>
+<tr><td>5.º</td><td>Repertorio de dificultad media-alta/alta; mayor complejidad de líneas, texturas y relaciones entre familias.</td><td>Comprensión estructural, relación entre líneas, familias y planos, equilibrio, autonomía, resolución.</td></tr>
+<tr><td>6.º</td><td>Repertorio de dificultad alta y diversidad estilística; seleccionado de acuerdo con las posibilidades reales.</td><td>Integración orquestal, comprensión de textura y función, autonomía interpretativa, adaptación.</td></tr>
+</table>
+
+<h3>17.9. Documentación complementaria</h3>
+<p>La documentación complementaria constituye el conjunto de documentos, referencias, materiales y recursos de apoyo que complementan, desarrollan o facilitan la aplicación de esta Programación Didáctica.</p>
+<p>Tipos: referencias normativas complementarias, referencias documentales, guías y protocolos, modelos de comunicación, fichas de coordinación, guías de atención a la diversidad, protocolos de actuación, materiales de apoyo al alumnado y al profesorado, y referencias bibliográficas y documentales.</p>
+
+<h4>Guías y protocolos</h4>
+<ul>
+<li><strong>Guía para la organización de ensayos:</strong> orientaciones para la organización eficaz de los ensayos.</li>
+<li><strong>Guía para la organización de audiciones y conciertos:</strong> orientaciones para la organización de audiciones y conciertos.</li>
+<li><strong>Guía para la coordinación docente:</strong> orientaciones para la coordinación entre el profesorado.</li>
+<li><strong>Guía para la atención a la diversidad:</strong> orientaciones para la atención a la diversidad del alumnado.</li>
+<li><strong>Guía para la recuperación de aprendizajes:</strong> orientaciones para la recuperación de aprendizajes no alcanzados.</li>
+<li><strong>Guía para la evaluación por tribunal:</strong> orientaciones para la evaluación por tribunal.</li>
+</ul>
+
+<h4>Protocolos de actuación</h4>
+<ul>
+<li>Protocolo de actuación ante dificultades de aprendizaje.</li>
+<li>Protocolo de actuación ante incidencias en la interpretación.</li>
+<li>Protocolo de actuación ante dificultades en la coordinación.</li>
+<li>Protocolo de actuación ante dificultades en la preparación.</li>
+<li>Protocolo de actuación ante dificultades en la evaluación.</li>
+<li>Protocolo de actuación ante actividades complementarias.</li>
+</ul>
+
+<hr>
+
+<div class="hold-notice">
+<strong>NOTA DE CONTROL DOCUMENTAL:</strong> Los pesos internos, factores de cálculo y ponderaciones que no estén definitivamente aprobados quedarán expresamente en HOLD y no se presentarán como norma en ningún apartado de esta programación. Las ponderaciones definitivas deberán establecerse únicamente después de la correspondiente validación curricular e institucional.
+</div>
+
+<div class="hold-notice">
+<strong>ELEMENTOS PENDIENTES DE VERIFICACIÓN / HOLD:</strong> vigencia actualizada de las disposiciones normativas; modificaciones posteriores; datos institucionales; datos organizativos; datos del alumnado; datos del repertorio; ponderaciones; protocolos específicos del centro; y cualquier concreción que requiera validación documental posterior para el curso 2026/2027.
+</div>
+
+<hr>
+
+<p style="text-align:center;font-style:italic;color:var(--text-light);margin-top:40px">
+Fin de la Programación Didáctica 2026/2027 — Música de Cámara · Banda · Orquesta<br>
+Enseñanzas Profesionales de Música · Extremadura
+</p>
+
+</body>
+</html>
